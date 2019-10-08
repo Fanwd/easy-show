@@ -1,0 +1,6 @@
+spring:
+  rabbitmq:
+    host: 192.168.124.69
+    username: admin
+    password: 123456
+    virtual-host: /easyshow_dev
