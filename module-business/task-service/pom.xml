@@ -24,4 +24,30 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <!--https://github.com/apigcc/apigcc-maven-plugin-->
+                <groupId>com.github.apiggs</groupId>
+                <artifactId>apiggs-maven-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>apiggs</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- options in there -->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

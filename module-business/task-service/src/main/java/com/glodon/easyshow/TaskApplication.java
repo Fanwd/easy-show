@@ -7,8 +7,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
+ * @readme 异步任务服务
  * @Author: fanwd
- * @Description:
+ * @Description: 任务服务
  * @Date: Create in 21:32 2019/10/8
  */
 @SpringBootApplication
