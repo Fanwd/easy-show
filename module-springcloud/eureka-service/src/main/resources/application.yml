@@ -14,5 +14,7 @@ eureka:
     fetch-registry: false
     service-url:
       defaultZone: @eureka.defaultZone@
+    healthcheck:
+      enabled: true
   instance:
     prefer-ip-address: true

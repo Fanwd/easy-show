@@ -45,7 +45,7 @@
             </activation>
             <properties>
                 <config.uri>http://localhost:8888/</config.uri>
-                <eureka.defaultZone>http://localhost:9999/</eureka.defaultZone>
+                <eureka.defaultZone>http://localhost:9999/eureka/</eureka.defaultZone>
                 <spring.profiles.active>dev</spring.profiles.active>
             </properties>
         </profile>
