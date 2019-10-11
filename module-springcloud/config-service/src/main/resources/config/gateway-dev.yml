@@ -9,11 +9,3 @@ eureka:
     prefer-ip-address: true
     lease-expiration-duration-in-seconds: 15 # 续约更新时间间隔（默认90秒）
     lease-renewal-interval-in-seconds: 5 # 续约到期时间（默认30秒）
-
-spring:
-  rabbitmq:
-    host: 192.168.124.69
-    port: 5672
-    username: admin
-    password: 123456
-    virtual-host: /easyshow_dev
