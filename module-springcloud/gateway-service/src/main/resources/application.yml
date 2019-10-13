@@ -4,3 +4,13 @@ server:
 spring:
   application:
     name: gateway-service
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+          predicates:
+            - Path='/api/'+serviceId+'/**'
+          filters:
+            - RewritePath='/api/'+serviceId+'/(?<remaining>.*)', '/${remaining}'
