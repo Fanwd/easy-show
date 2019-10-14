@@ -1,5 +1,6 @@
 package com.glodon.easyshow.api;
 
+import com.glodon.easyshow.entity.JsonResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,5 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/theme")
 public class ThemeApi {
+
+    /**
+     * 查询所有主题
+     *
+     * @return
+     */
+    public JsonResult listAllTheme() {
+        return JsonResult.success();
+    }
 
 }
