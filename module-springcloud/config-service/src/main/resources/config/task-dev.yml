@@ -1,16 +1,7 @@
-eureka:
-  client:
-    healthcheck:
-      enabled: true
-    service-url:
-      defaultZone: '@eureka.defaultZone@'
-  instance:
-    instance-id: ${spring.cloud.client.ip-address}:${server.port}
-    prefer-ip-address: true
-    lease-expiration-duration-in-seconds: 15 # 续约更新时间间隔（默认90秒）
-    lease-renewal-interval-in-seconds: 5 # 续约到期时间（默认30秒）
-
 spring:
+  application:
+    name: task
+
   rabbitmq:
     host: 192.168.124.69
     port: 5672
