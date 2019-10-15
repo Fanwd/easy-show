@@ -1,8 +1,13 @@
 package com.glodon.easyshow.api;
 
+import com.glodon.easyshow.entity.ChartThemeEntity;
 import com.glodon.easyshow.entity.JsonResult;
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.glodon.easyshow.repository.ChartThemeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @ClassName ChartThemeApi
@@ -11,16 +16,20 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date 2019/10/14 19:42
  **/
 @RestController
-@RequestMapping("/theme")
 public class ChartThemeApi {
+
+    @Autowired
+    private ChartThemeRepository chartThemeRepository;
 
     /**
      * 查询所有主题
      *
      * @return
      */
-    public JsonResult listAllTheme() {
-        return JsonResult.success();
+    @GetMapping("/themes")
+    public JsonResult<List<ChartThemeEntity>> listAllTheme() {
+        List<ChartThemeEntity> themeList = chartThemeRepository.findAll();
+        return JsonResult.success(themeList);
     }
 
 }

@@ -21,7 +21,6 @@ public class JpaTest {
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test() {
         TaskInfoEntity one = taskInfoRepository.getOne(1L);
-        System.out.println(one.getName());
         return one.getName();
     }
 }
