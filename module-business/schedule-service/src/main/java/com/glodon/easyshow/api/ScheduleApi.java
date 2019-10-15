@@ -3,7 +3,6 @@ package com.glodon.easyshow.api;
 import com.glodon.easyshow.job.RequestJob;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.quartz.SpringBeanJobFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;

@@ -15,8 +15,7 @@ public class JsonResult<T> {
     private T data;
 
     public static JsonResult success() {
-        JsonResult result = new JsonResult();
-        return result;
+        return new JsonResult();
     }
 
     public Integer getCode() {
