@@ -1,42 +1,56 @@
 package com.glodon.easyshow.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
- * 主题样式
+ * 图表设计信息
  */
 @Entity
-@Table(name = "chart_theme")
-public class ChartThemeEntity implements Serializable {
+@Table(name = "chart_design")
+public class ChartDesignEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
      * 主键ID
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", insertable = false, nullable = false)
     private Long id;
 
     /**
-     * 主题名称
+     * 图表名称
      */
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
     /**
-     * 样式
+     * 图表设计
      */
-    @Column(name = "style")
-    private String style;
+    @Column(name = "design")
+    private String design;
+
+    /**
+     * 数据源id
+     */
+    @Column(name = "datasource_id")
+    private Long datasourceId;
+
+    /**
+     * 主题id
+     */
+    @Column(name = "theme_id")
+    private Long themeId;
 
     /**
      * 创建日期
      */
-    @Column(name = "create_date")
-    private Timestamp createDate;
+    @Column(name = "created_date")
+    private Timestamp createdDate;
 
     /**
      * 最后修改日期

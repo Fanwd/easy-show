@@ -1,12 +1,9 @@
 package com.glodon.easyshow.repository;
 
-import com.glodon.easyshow.entity.ChartDatasourceEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import com.glodon.easyshow.entity.ChartDatasourceEntity;
 
-/**
- * @Author: fanwd
- * @Description:
- * @Date: Create in 23:57 2019/10/14
- */
-public interface ChartDatasourceRepository extends JpaRepository<ChartDatasourceEntity, Long> {
+public interface ChartDatasourceRepository extends JpaRepository<ChartDatasourceEntity, Long>, JpaSpecificationExecutor<ChartDatasourceEntity> {
+
 }
