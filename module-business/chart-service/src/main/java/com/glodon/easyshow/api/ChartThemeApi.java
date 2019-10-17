@@ -1,13 +1,13 @@
 package com.glodon.easyshow.api;
 
-import com.glodon.easyshow.entity.ChartThemeEntity;
-import com.glodon.easyshow.repository.ChartThemeRepository;
+import com.glodon.easyshow.dto.ChartThemeDTO;
 import com.glodon.easyshow.result.JsonResult;
+import com.glodon.easyshow.service.ChartThemeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,18 +22,41 @@ import java.util.List;
 public class ChartThemeApi {
 
     @Autowired
-    private ChartThemeRepository chartThemeRepository;
+    ChartThemeService chartThemeService;
 
-    /**
-     * 获取所有主题
-     *
-     * @return
-     */
     @ApiOperation("获取所有主题")
     @GetMapping("/themes")
-    public JsonResult<List<ChartThemeEntity>> listAllTheme() {
-        List<ChartThemeEntity> themeList = chartThemeRepository.findAll();
-        return JsonResult.success(themeList);
+    public JsonResult<List<ChartThemeDTO>> listAllTheme() {
+        List<ChartThemeDTO> result = chartThemeService.listAll();
+        return JsonResult.success(result);
+    }
+
+    @ApiOperation("根据ID查询主题")
+    @GetMapping("/themes/{id}")
+    public JsonResult<ChartThemeDTO> getThemeById(@ApiParam("主题ID") @PathVariable("id") Long id) {
+        ChartThemeDTO result = chartThemeService.getThemeById(id);
+        return JsonResult.success(result);
+    }
+
+    @ApiOperation("新增主题")
+    @PostMapping("/themes")
+    public JsonResult addTheme(@ApiParam("主题信息") @RequestBody ChartThemeDTO chartThemeDTO) {
+        chartThemeService.addTheme(chartThemeDTO);
+        return JsonResult.success();
+    }
+
+    @ApiOperation("修改主题")
+    @PutMapping("/themes/{id}")
+    public JsonResult updateTheme(@ApiParam("主题ID") @PathVariable("id") Long id, @ApiParam("主题信息") @RequestBody ChartThemeDTO chartThemeDTO) {
+        chartThemeService.updateTheme(id, chartThemeDTO);
+        return JsonResult.success();
+    }
+
+    @ApiOperation("删除主题")
+    @DeleteMapping("/themes/{id}")
+    public JsonResult deleteTheme(@ApiParam("主题ID") @PathVariable("id") Long id) {
+        chartThemeService.deleteThemeById(id);
+        return JsonResult.success();
     }
 
 }

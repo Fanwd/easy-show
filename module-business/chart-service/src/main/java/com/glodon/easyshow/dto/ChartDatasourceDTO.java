@@ -1,28 +1,116 @@
 package com.glodon.easyshow.dto;
 
+import com.glodon.easyshow.entity.ChartDatasourceEntity;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * @ClassName ChartDatasourceDTO
  * @Description: 数据源dto
  * @Author: fanwd
  * @Date: Create in 23:08 2019/10/15
  */
+@ApiModel("数据源DTO")
 public class ChartDatasourceDTO {
-    private long id;
+
+    /**
+     * 主键ID
+     */
+    @ApiModelProperty("主键ID")
+    private Long id;
+
+    /**
+     * 数据源名称
+     */
+    @ApiModelProperty("数据源名称")
     private String name;
-    private Byte type;
+
+    /**
+     * 数据源类型
+     */
+    @ApiModelProperty("数据源类型")
+    private Integer type;
+
+    /**
+     * 请求地址
+     */
+    @ApiModelProperty("请求地址")
     private String requestUrl;
+
+    /**
+     * 请求方法
+     */
+    @ApiModelProperty("请求方法")
     private String requestMethod;
+
+    /**
+     * 请求头
+     */
+    @ApiModelProperty("请求头")
     private String requestHeader;
+
+    /**
+     * 请求body
+     */
+    @ApiModelProperty("请求body")
     private String requestBody;
+
+    /**
+     * 返回body
+     */
+    @ApiModelProperty("返回body")
     private String responseBody;
+
+    /**
+     * 静态数据
+     */
+    @ApiModelProperty("静态数据")
     private String staticData;
+
+    /**
+     * 数据路径
+     */
+    @ApiModelProperty("数据路径")
     private String dataPath;
 
-    public long getId() {
+    public ChartDatasourceDTO() {
+    }
+
+    public ChartDatasourceDTO(ChartDatasourceEntity entity) {
+        if (entity != null) {
+            this.id = entity.getId();
+            this.name = entity.getName();
+            this.type = entity.getType();
+            this.requestUrl = entity.getRequestUrl();
+            this.requestMethod = entity.getRequestMethod();
+            this.requestHeader = entity.getRequestHeader();
+            this.requestBody = entity.getRequestBody();
+            this.responseBody = entity.getResponseBody();
+            this.staticData = entity.getStaticData();
+            this.dataPath = entity.getDataPath();
+        }
+    }
+
+    public ChartDatasourceEntity toEntity() {
+        ChartDatasourceEntity entity = new ChartDatasourceEntity();
+        entity.setId(this.id);
+        entity.setName(this.name);
+        entity.setType(this.type);
+        entity.setRequestUrl(this.requestUrl);
+        entity.setRequestMethod(this.requestMethod);
+        entity.setRequestHeader(this.requestHeader);
+        entity.setRequestBody(this.requestBody);
+        entity.setResponseBody(this.responseBody);
+        entity.setStaticData(this.staticData);
+        entity.setDataPath(this.dataPath);
+        return entity;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -34,11 +122,11 @@ public class ChartDatasourceDTO {
         this.name = name;
     }
 
-    public Byte getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(Byte type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 
@@ -96,5 +184,21 @@ public class ChartDatasourceDTO {
 
     public void setDataPath(String dataPath) {
         this.dataPath = dataPath;
+    }
+
+    @Override
+    public String toString() {
+        return "ChartDatasourceDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type=" + type +
+                ", requestUrl='" + requestUrl + '\'' +
+                ", requestMethod='" + requestMethod + '\'' +
+                ", requestHeader='" + requestHeader + '\'' +
+                ", requestBody='" + requestBody + '\'' +
+                ", responseBody='" + responseBody + '\'' +
+                ", staticData='" + staticData + '\'' +
+                ", dataPath='" + dataPath + '\'' +
+                '}';
     }
 }
