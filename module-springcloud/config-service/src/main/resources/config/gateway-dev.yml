@@ -10,4 +10,4 @@ spring:
           predicates:
             - Path='/api/'+serviceId+'/**'
           filters:
-            - RewritePath='/api/'+serviceId+'/(?<remaining>.*)', '/${remaining}'
+            - RewritePath='/api/'+serviceId+'/v1/(?<remaining>.*)', '/${remaining}'
