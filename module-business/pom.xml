@@ -14,7 +14,7 @@
     <modules>
         <module>schedule-service</module>
         <module>task-service</module>
-        <module>chart-service</module>
+        <module>design-service</module>
     </modules>
 
 
