@@ -1,6 +1,2 @@
 server:
   port: 11003
-spring:
-  jackson:
-    generator:
-      write_numbers_as_strings: true

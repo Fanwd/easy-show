@@ -7,21 +7,22 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @ClassName JacksonConfiguration
- * @Description jackson配置
+ * @Description 配置jackson
  * @Author fanwd
- * @Date 2019/10/17 20:58
+ * @Date 2019/10/18 13:43
  **/
 @Configuration
 public class JacksonConfiguration {
 
     /**
-     * 解决前端long类型丢失精度问题
+     * 定制jackson序列化规则
      *
      * @return
      */
     @Bean
     public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
-        return jacksonObjectMapperBuilder -> jacksonObjectMapperBuilder.serializerByType(Long.TYPE, ToStringSerializer.instance);
+        return jacksonObjectMapperBuilder -> jacksonObjectMapperBuilder
+                .serializerByType(Long.TYPE, ToStringSerializer.instance);
     }
 
 }
