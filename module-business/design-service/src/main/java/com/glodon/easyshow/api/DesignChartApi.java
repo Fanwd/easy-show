@@ -34,7 +34,7 @@ public class DesignChartApi {
 
     @ApiOperation("根据ID查询图表")
     @GetMapping("/charts/{id}")
-    public JsonResult<Optional<DesignChartDTO>> getChartById(@ApiParam("图表ID") @PathVariable("id") Long id) {
+    public JsonResult<Optional<DesignChartDTO>> getChartById(@ApiParam("图表ID") @PathVariable("id") String id) {
         Optional<DesignChartDTO> result = designChartService.getChartById(id);
         return JsonResult.success(result);
     }
@@ -48,7 +48,7 @@ public class DesignChartApi {
 
     @ApiOperation("修改图表")
     @PutMapping("/charts/{id}")
-    public JsonResult updateChart(@ApiParam("图表ID") @PathVariable("id") Long id,
+    public JsonResult updateChart(@ApiParam("图表ID") @PathVariable("id") String id,
                                   @ApiParam("图表信息") @RequestBody DesignChartDTO designThemeDTO) {
         designChartService.updateChart(id, designThemeDTO);
         return JsonResult.success();
@@ -56,7 +56,7 @@ public class DesignChartApi {
 
     @ApiOperation("删除图表")
     @DeleteMapping("/charts/{id}")
-    public JsonResult deleteChart(@ApiParam("图表ID") @PathVariable("id") Long id) {
+    public JsonResult deleteChart(@ApiParam("图表ID") @PathVariable("id") String id) {
         designChartService.deleteChartById(id);
         return JsonResult.success();
     }

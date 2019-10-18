@@ -34,7 +34,7 @@ public class DesignDatasourceApi {
 
     @ApiOperation("根据ID查询数据源")
     @GetMapping("/datasources/{id}")
-    public JsonResult<Optional<DesignDatasourceDTO>> getDatasourceById(@ApiParam("数据源ID") @PathVariable("id") Long id) {
+    public JsonResult<Optional<DesignDatasourceDTO>> getDatasourceById(@ApiParam("数据源ID") @PathVariable("id") String id) {
         Optional<DesignDatasourceDTO> result = designDatasourceService.getDatasourceById(id);
         return JsonResult.success(result);
     }
@@ -48,7 +48,7 @@ public class DesignDatasourceApi {
 
     @ApiOperation("修改数据源")
     @PutMapping("/datasources/{id}")
-    public JsonResult updateDatasource(@ApiParam("数据源ID") @PathVariable("id") Long id,
+    public JsonResult updateDatasource(@ApiParam("数据源ID") @PathVariable("id") String id,
                                        @ApiParam("数据源信息") @RequestBody DesignDatasourceDTO chartThemeDTO) {
         designDatasourceService.updateDatasource(id, chartThemeDTO);
         return JsonResult.success();
@@ -56,7 +56,7 @@ public class DesignDatasourceApi {
 
     @ApiOperation("删除数据源")
     @DeleteMapping("/datasources/{id}")
-    public JsonResult deleteDatasource(@ApiParam("数据源ID") @PathVariable("id") Long id) {
+    public JsonResult deleteDatasource(@ApiParam("数据源ID") @PathVariable("id") String id) {
         designDatasourceService.deleteDatasourceById(id);
         return JsonResult.success();
     }

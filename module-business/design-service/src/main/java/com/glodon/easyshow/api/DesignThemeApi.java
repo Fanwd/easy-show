@@ -48,14 +48,15 @@ public class DesignThemeApi {
 
     @ApiOperation("修改主题")
     @PutMapping("/themes/{id}")
-    public JsonResult updateTheme(@ApiParam("主题ID") @PathVariable("id") Long id, @ApiParam("主题信息") @RequestBody DesignThemeDTO designThemeDTO) {
+    public JsonResult updateTheme(@ApiParam("主题ID") @PathVariable("id") String id,
+                                  @ApiParam("主题信息") @RequestBody DesignThemeDTO designThemeDTO) {
         chartThemeService.updateTheme(id, designThemeDTO);
         return JsonResult.success();
     }
 
     @ApiOperation("删除主题")
     @DeleteMapping("/themes/{id}")
-    public JsonResult deleteTheme(@ApiParam("主题ID") @PathVariable("id") Long id) {
+    public JsonResult deleteTheme(@ApiParam("主题ID") @PathVariable("id") String id) {
         chartThemeService.deleteThemeById(id);
         return JsonResult.success();
     }
