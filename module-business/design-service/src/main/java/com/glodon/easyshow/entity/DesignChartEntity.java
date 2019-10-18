@@ -46,13 +46,13 @@ public class DesignChartEntity implements Serializable {
      * 数据源id
      */
     @Field("datasource_id")
-    private Long datasourceId;
+    private String datasourceId;
 
     /**
      * 主题id
      */
     @Field("theme_id")
-    private Long themeId;
+    private String themeId;
 
     public String getId() {
         return id;
@@ -94,19 +94,19 @@ public class DesignChartEntity implements Serializable {
         this.design = design;
     }
 
-    public Long getDatasourceId() {
+    public String getDatasourceId() {
         return datasourceId;
     }
 
-    public void setDatasourceId(Long datasourceId) {
+    public void setDatasourceId(String datasourceId) {
         this.datasourceId = datasourceId;
     }
 
-    public Long getThemeId() {
+    public String getThemeId() {
         return themeId;
     }
 
-    public void setThemeId(Long themeId) {
+    public void setThemeId(String themeId) {
         this.themeId = themeId;
     }
 
@@ -118,8 +118,8 @@ public class DesignChartEntity implements Serializable {
                 ", chartType='" + chartType + '\'' +
                 ", styleType='" + styleType + '\'' +
                 ", design='" + design + '\'' +
-                ", datasourceId=" + datasourceId +
-                ", themeId=" + themeId +
+                ", datasourceId='" + datasourceId + '\'' +
+                ", themeId='" + themeId + '\'' +
                 '}';
     }
 }

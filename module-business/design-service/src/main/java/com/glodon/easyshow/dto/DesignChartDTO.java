@@ -47,13 +47,13 @@ public class DesignChartDTO {
      * 数据源id
      */
     @ApiModelProperty("数据源ID")
-    private Long datasourceId;
+    private String datasourceId;
 
     /**
      * 主题id
      */
     @ApiModelProperty("主题ID")
-    private Long themeId;
+    private String themeId;
 
     public DesignChartDTO() {
     }
@@ -119,19 +119,19 @@ public class DesignChartDTO {
         this.design = design;
     }
 
-    public Long getDatasourceId() {
+    public String getDatasourceId() {
         return datasourceId;
     }
 
-    public void setDatasourceId(Long datasourceId) {
+    public void setDatasourceId(String datasourceId) {
         this.datasourceId = datasourceId;
     }
 
-    public Long getThemeId() {
+    public String getThemeId() {
         return themeId;
     }
 
-    public void setThemeId(Long themeId) {
+    public void setThemeId(String themeId) {
         this.themeId = themeId;
     }
 
@@ -143,8 +143,8 @@ public class DesignChartDTO {
                 ", chartType='" + chartType + '\'' +
                 ", styleType='" + styleType + '\'' +
                 ", design='" + design + '\'' +
-                ", datasourceId=" + datasourceId +
-                ", themeId=" + themeId +
+                ", datasourceId='" + datasourceId + '\'' +
+                ", themeId='" + themeId + '\'' +
                 '}';
     }
 }
