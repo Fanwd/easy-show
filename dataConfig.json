@@ -1,0 +1,88 @@
+{
+    "chartType": "柱状图", 
+    "chartStyle": "柱状图、堆积图、柱状图、柱状图、柱状图",
+    "config": {
+        "xAxisConfig": {
+            // 一级分类
+            "typeField": {
+                "field": "province", 
+                "aliasName": "省份",
+                "sort": {
+                    "sortBy": "x/y",
+                    "sortName": "省份/总人数/平均人数",
+                    "sortType": "asc/desc"
+                },
+                "filter": [
+                    {
+                        "filterBy": "x/y", 
+                        "name": "省份",
+                        "filterType": "大于/小于/为空/不为空/in", 
+                        "value": ""
+                    }
+                ]
+            }, 
+            // 二级分类
+            "seriesField": {
+                "field": "city", 
+                "aliasName": "城市",
+                "sort": {
+                    "sortBy": "x/y",
+                    "sortName": "省份/总人数/平均人数",
+                    "sortType": "asc/desc"
+                },
+                "filter": [
+                    {
+                        "filterBy": "x/y", 
+                        "name": "省份",
+                        "filterType": "大于/小于/为空/不为空"
+                    }
+                ]
+            }
+        }, 
+        "yAxisConfig": [
+            // 指标
+            {
+                "type": "field",
+                "name": "count",
+                "showType": "line/column",
+                "yIndex": "0/1",
+                "aliasName": "总人数",
+                "calcType": "求和、平均数、最大值、最小值", 
+                "isVisible": false,
+                "filter": [
+                    {
+                        "filterBy": "y", 
+                        "field": "name",
+                        "filterType": "大于/小于/为空/不为空"
+                    }
+                ]
+            }, {
+                "type": "field",
+                "name": "count",
+                "aliasName": "平均人数",
+                "calcType": "求和、平均数、最大值、最小值", 
+                "isVisible": true
+            }, {
+                "type": "calc",
+                "name": "count",
+                "aliasName": "总人数",
+                "calcType": "所有值求和/所有平均数/", 
+                "isVisible": true
+            }, {
+                "type": "calc",
+                "name": "(总人数 + 总人数 + 总人数)/所有人数",
+                "aliasName": "占比",
+                "calcType": "expression", 
+                "isVisible": true
+            }
+        ]
+    },
+    "style": {
+        "background": "",
+        "color": "",
+        "title": ""
+    }, 
+    "dataId": ""
+}
+
+

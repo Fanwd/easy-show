@@ -1,5 +1,7 @@
 package com.glodon.easyshow.entity;
 
+import com.glodon.easyshow.pojo.DataStructure;
+import com.glodon.easyshow.pojo.RequestInfo;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -31,46 +33,28 @@ public class DesignDatasourceEntity implements Serializable {
     private Integer type;
 
     /**
-     * 请求地址
+     * 请求信息
      */
-    @Field("request_url")
-    private String requestUrl;
+    @Field("request_info")
+    private RequestInfo requestInfo;
 
     /**
-     * 请求方法
+     * 数据
      */
-    @Field("request_method")
-    private String requestMethod;
-
-    /**
-     * 请求头
-     */
-    @Field("request_header")
-    private String requestHeader;
-
-    /**
-     * 请求body
-     */
-    @Field("request_body")
-    private String requestBody;
-
-    /**
-     * 返回body
-     */
-    @Field("response_body")
-    private String responseBody;
-
-    /**
-     * 静态数据
-     */
-    @Field("static_data")
-    private String staticData;
+    @Field("data")
+    private String data;
 
     /**
      * 数据路径
      */
     @Field("data_path")
     private String dataPath;
+
+    /**
+     * 数据结构
+     */
+    @Field("data_structure")
+    private DataStructure dataStructure;
 
     public String getId() {
         return id;
@@ -96,52 +80,20 @@ public class DesignDatasourceEntity implements Serializable {
         this.type = type;
     }
 
-    public String getRequestUrl() {
-        return requestUrl;
+    public RequestInfo getRequestInfo() {
+        return requestInfo;
     }
 
-    public void setRequestUrl(String requestUrl) {
-        this.requestUrl = requestUrl;
+    public void setRequestInfo(RequestInfo requestInfo) {
+        this.requestInfo = requestInfo;
     }
 
-    public String getRequestMethod() {
-        return requestMethod;
+    public String getData() {
+        return data;
     }
 
-    public void setRequestMethod(String requestMethod) {
-        this.requestMethod = requestMethod;
-    }
-
-    public String getRequestHeader() {
-        return requestHeader;
-    }
-
-    public void setRequestHeader(String requestHeader) {
-        this.requestHeader = requestHeader;
-    }
-
-    public String getRequestBody() {
-        return requestBody;
-    }
-
-    public void setRequestBody(String requestBody) {
-        this.requestBody = requestBody;
-    }
-
-    public String getResponseBody() {
-        return responseBody;
-    }
-
-    public void setResponseBody(String responseBody) {
-        this.responseBody = responseBody;
-    }
-
-    public String getStaticData() {
-        return staticData;
-    }
-
-    public void setStaticData(String staticData) {
-        this.staticData = staticData;
+    public void setData(String data) {
+        this.data = data;
     }
 
     public String getDataPath() {
@@ -152,19 +104,24 @@ public class DesignDatasourceEntity implements Serializable {
         this.dataPath = dataPath;
     }
 
+    public DataStructure getDataStructure() {
+        return dataStructure;
+    }
+
+    public void setDataStructure(DataStructure dataStructure) {
+        this.dataStructure = dataStructure;
+    }
+
     @Override
     public String toString() {
         return "DesignDatasourceEntity{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", type=" + type +
-                ", requestUrl='" + requestUrl + '\'' +
-                ", requestMethod='" + requestMethod + '\'' +
-                ", requestHeader='" + requestHeader + '\'' +
-                ", requestBody='" + requestBody + '\'' +
-                ", responseBody='" + responseBody + '\'' +
-                ", staticData='" + staticData + '\'' +
+                ", requestInfo=" + requestInfo +
+                ", data='" + data + '\'' +
                 ", dataPath='" + dataPath + '\'' +
+                ", dataStructure=" + dataStructure +
                 '}';
     }
 }

@@ -1,6 +1,8 @@
 package com.glodon.easyshow.dto;
 
 import com.glodon.easyshow.entity.DesignDatasourceEntity;
+import com.glodon.easyshow.pojo.DataStructure;
+import com.glodon.easyshow.pojo.RequestInfo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -32,40 +34,16 @@ public class DesignDatasourceDTO {
     private Integer type;
 
     /**
-     * 请求地址
+     * 请求信息
      */
-    @ApiModelProperty("请求地址")
-    private String requestUrl;
+    @ApiModelProperty("请求信息")
+    private RequestInfo requestInfo;
 
     /**
-     * 请求方法
+     * 数据
      */
-    @ApiModelProperty("请求方法")
-    private String requestMethod;
-
-    /**
-     * 请求头
-     */
-    @ApiModelProperty("请求头")
-    private String requestHeader;
-
-    /**
-     * 请求body
-     */
-    @ApiModelProperty("请求body")
-    private String requestBody;
-
-    /**
-     * 返回body
-     */
-    @ApiModelProperty("返回body")
-    private String responseBody;
-
-    /**
-     * 静态数据
-     */
-    @ApiModelProperty("静态数据")
-    private String staticData;
+    @ApiModelProperty("数据")
+    private String data;
 
     /**
      * 数据路径
@@ -73,20 +51,33 @@ public class DesignDatasourceDTO {
     @ApiModelProperty("数据路径")
     private String dataPath;
 
+    /**
+     * 数据结构
+     */
+    @ApiModelProperty("数据结构")
+    private DataStructure dataStructure;
+
     public DesignDatasourceDTO() {
+    }
+
+    public DesignDatasourceDTO(String id, String name, Integer type, RequestInfo requestInfo, String data, String dataPath, DataStructure dataStructure) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.requestInfo = requestInfo;
+        this.data = data;
+        this.dataPath = dataPath;
+        this.dataStructure = dataStructure;
     }
 
     public DesignDatasourceDTO(DesignDatasourceEntity entity) {
         this.id = entity.getId();
         this.name = entity.getName();
         this.type = entity.getType();
-        this.requestUrl = entity.getRequestUrl();
-        this.requestMethod = entity.getRequestMethod();
-        this.requestHeader = entity.getRequestHeader();
-        this.requestBody = entity.getRequestBody();
-        this.responseBody = entity.getResponseBody();
-        this.staticData = entity.getStaticData();
+        this.requestInfo = entity.getRequestInfo();
+        this.data = entity.getData();
         this.dataPath = entity.getDataPath();
+        this.dataStructure = entity.getDataStructure();
     }
 
     public DesignDatasourceEntity toEntity() {
@@ -94,13 +85,10 @@ public class DesignDatasourceDTO {
         entity.setId(this.id);
         entity.setName(this.name);
         entity.setType(this.type);
-        entity.setRequestUrl(this.requestUrl);
-        entity.setRequestMethod(this.requestMethod);
-        entity.setRequestHeader(this.requestHeader);
-        entity.setRequestBody(this.requestBody);
-        entity.setResponseBody(this.responseBody);
-        entity.setStaticData(this.staticData);
+        entity.setRequestInfo(this.requestInfo);
+        entity.setData(this.data);
         entity.setDataPath(this.dataPath);
+        entity.setDataStructure(this.dataStructure);
         return entity;
     }
 
@@ -128,52 +116,20 @@ public class DesignDatasourceDTO {
         this.type = type;
     }
 
-    public String getRequestUrl() {
-        return requestUrl;
+    public RequestInfo getRequestInfo() {
+        return requestInfo;
     }
 
-    public void setRequestUrl(String requestUrl) {
-        this.requestUrl = requestUrl;
+    public void setRequestInfo(RequestInfo requestInfo) {
+        this.requestInfo = requestInfo;
     }
 
-    public String getRequestMethod() {
-        return requestMethod;
+    public String getData() {
+        return data;
     }
 
-    public void setRequestMethod(String requestMethod) {
-        this.requestMethod = requestMethod;
-    }
-
-    public String getRequestHeader() {
-        return requestHeader;
-    }
-
-    public void setRequestHeader(String requestHeader) {
-        this.requestHeader = requestHeader;
-    }
-
-    public String getRequestBody() {
-        return requestBody;
-    }
-
-    public void setRequestBody(String requestBody) {
-        this.requestBody = requestBody;
-    }
-
-    public String getResponseBody() {
-        return responseBody;
-    }
-
-    public void setResponseBody(String responseBody) {
-        this.responseBody = responseBody;
-    }
-
-    public String getStaticData() {
-        return staticData;
-    }
-
-    public void setStaticData(String staticData) {
-        this.staticData = staticData;
+    public void setData(String data) {
+        this.data = data;
     }
 
     public String getDataPath() {
@@ -184,19 +140,24 @@ public class DesignDatasourceDTO {
         this.dataPath = dataPath;
     }
 
+    public DataStructure getDataStructure() {
+        return dataStructure;
+    }
+
+    public void setDataStructure(DataStructure dataStructure) {
+        this.dataStructure = dataStructure;
+    }
+
     @Override
     public String toString() {
         return "DesignDatasourceDTO{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", type=" + type +
-                ", requestUrl='" + requestUrl + '\'' +
-                ", requestMethod='" + requestMethod + '\'' +
-                ", requestHeader='" + requestHeader + '\'' +
-                ", requestBody='" + requestBody + '\'' +
-                ", responseBody='" + responseBody + '\'' +
-                ", staticData='" + staticData + '\'' +
+                ", requestInfo=" + requestInfo +
+                ", data='" + data + '\'' +
                 ", dataPath='" + dataPath + '\'' +
+                ", dataStructure=" + dataStructure +
                 '}';
     }
 }
