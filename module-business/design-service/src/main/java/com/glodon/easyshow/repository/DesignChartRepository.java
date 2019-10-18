@@ -1,9 +1,8 @@
 package com.glodon.easyshow.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import com.glodon.easyshow.entity.DesignChartEntity;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface DesignChartRepository extends JpaRepository<DesignChartEntity, Long>, JpaSpecificationExecutor<DesignChartEntity> {
+public interface DesignChartRepository extends MongoRepository<DesignChartEntity, String> {
 
 }

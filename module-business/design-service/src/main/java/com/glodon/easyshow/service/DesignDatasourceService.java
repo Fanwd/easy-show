@@ -19,7 +19,7 @@ public interface DesignDatasourceService {
      * @param id
      * @return
      */
-    Optional<DesignDatasourceDTO> getDatasourceById(Long id);
+    Optional<DesignDatasourceDTO> getDatasourceById(String id);
 
     /**
      * 添加数据源
@@ -31,17 +31,17 @@ public interface DesignDatasourceService {
     /**
      * 更新数据源
      *
-     * @param id                 主键ID
+     * @param id                  主键ID
      * @param designDatasourceDTO 数据源信息
      */
-    void updateDatasource(Long id, DesignDatasourceDTO designDatasourceDTO);
+    void updateDatasource(String id, DesignDatasourceDTO designDatasourceDTO);
 
     /**
      * 根据ID删除数据源
      *
      * @param id 数据源ID
      */
-    void deleteDatasourceById(Long id);
+    void deleteDatasourceById(String id);
 
     /**
      * 查询所有数据源

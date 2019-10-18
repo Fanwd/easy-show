@@ -27,7 +27,7 @@ public class DesignChartServiceImpl implements DesignChartService {
     private DesignChartRepository designChartRepository;
 
     @Override
-    public Optional<DesignChartDTO> getChartById(Long id) {
+    public Optional<DesignChartDTO> getChartById(String id) {
         Optional<DesignChartEntity> entityOptional = designChartRepository.findById(id);
         return entityOptional.map(DesignChartDTO::new);
     }
@@ -41,7 +41,7 @@ public class DesignChartServiceImpl implements DesignChartService {
     }
 
     @Override
-    public void updateChart(Long id, DesignChartDTO designChartDTO) {
+    public void updateChart(String id, DesignChartDTO designChartDTO) {
         Assert.notNull(id, "Id is null");
         Assert.notNull(designChartDTO, "Design is null");
 
@@ -59,7 +59,7 @@ public class DesignChartServiceImpl implements DesignChartService {
     }
 
     @Override
-    public void deleteChartById(Long id) {
+    public void deleteChartById(String id) {
         designChartRepository.deleteById(id);
     }
 

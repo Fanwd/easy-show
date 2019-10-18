@@ -17,7 +17,7 @@ public class DesignThemeDTO {
      * 主键ID
      */
     @ApiModelProperty("主键ID")
-    private Long id;
+    private String id;
 
     /**
      * 主题名称
@@ -48,11 +48,11 @@ public class DesignThemeDTO {
         return entity;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -74,8 +74,8 @@ public class DesignThemeDTO {
 
     @Override
     public String toString() {
-        return "ChartThemeDTO{" +
-                "id=" + id +
+        return "DesignThemeDTO{" +
+                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", style='" + style + '\'' +
                 '}';

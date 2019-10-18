@@ -27,7 +27,7 @@ public class DesignThemeServiceImpl implements DesignThemeService {
     private DesignThemeRepository designThemeRepository;
 
     @Override
-    public Optional<DesignThemeDTO> getThemeById(Long id) {
+    public Optional<DesignThemeDTO> getThemeById(String id) {
         Optional<DesignThemeEntity> entityOptional = designThemeRepository.findById(id);
         return entityOptional.map(DesignThemeDTO::new);
     }
@@ -38,11 +38,12 @@ public class DesignThemeServiceImpl implements DesignThemeService {
             return;
         }
         DesignThemeEntity newEntity = designThemeDTO.toEntity();
+        newEntity.setId(null);
         designThemeRepository.save(newEntity);
     }
 
     @Override
-    public void updateTheme(Long id, DesignThemeDTO designThemeDTO) {
+    public void updateTheme(String id, DesignThemeDTO designThemeDTO) {
         Assert.notNull(designThemeDTO, "theme is null");
         Assert.notNull(id, "theme id is null");
 
@@ -56,7 +57,7 @@ public class DesignThemeServiceImpl implements DesignThemeService {
     }
 
     @Override
-    public void deleteThemeById(Long id) {
+    public void deleteThemeById(String id) {
         designThemeRepository.deleteById(id);
     }
 

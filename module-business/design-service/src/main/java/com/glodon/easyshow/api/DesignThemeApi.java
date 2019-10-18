@@ -34,7 +34,7 @@ public class DesignThemeApi {
 
     @ApiOperation("根据ID查询主题")
     @GetMapping("/themes/{id}")
-    public JsonResult<Optional<DesignThemeDTO>> getThemeById(@ApiParam("主题ID") @PathVariable("id") Long id) {
+    public JsonResult<Optional<DesignThemeDTO>> getThemeById(@ApiParam("主题ID") @PathVariable("id") String id) {
         Optional<DesignThemeDTO> result = chartThemeService.getThemeById(id);
         return JsonResult.success(result);
     }

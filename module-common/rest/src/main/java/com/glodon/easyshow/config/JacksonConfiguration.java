@@ -14,15 +14,4 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class JacksonConfiguration {
 
-    /**
-     * 定制jackson序列化规则
-     *
-     * @return
-     */
-    @Bean
-    public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
-        return jacksonObjectMapperBuilder -> jacksonObjectMapperBuilder
-                .serializerByType(Long.TYPE, ToStringSerializer.instance);
-    }
-
 }

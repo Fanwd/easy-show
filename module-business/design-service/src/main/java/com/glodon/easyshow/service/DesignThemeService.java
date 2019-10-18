@@ -19,7 +19,7 @@ public interface DesignThemeService {
      * @param id
      * @return
      */
-    Optional<DesignThemeDTO> getThemeById(Long id);
+    Optional<DesignThemeDTO> getThemeById(String id);
 
     /**
      * 添加主题
@@ -34,14 +34,14 @@ public interface DesignThemeService {
      * @param id            主键ID
      * @param designThemeDTO 主题信息
      */
-    void updateTheme(Long id, DesignThemeDTO designThemeDTO);
+    void updateTheme(String id, DesignThemeDTO designThemeDTO);
 
     /**
      * 根据ID删除主题
      *
      * @param id 主题ID
      */
-    void deleteThemeById(Long id);
+    void deleteThemeById(String id);
 
     /**
      * 查询所有主题

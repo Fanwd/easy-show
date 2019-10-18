@@ -19,7 +19,7 @@ public interface DesignChartService {
      * @param id
      * @return
      */
-    Optional<DesignChartDTO> getChartById(Long id);
+    Optional<DesignChartDTO> getChartById(String id);
 
     /**
      * 添加图表
@@ -34,14 +34,14 @@ public interface DesignChartService {
      * @param id             主键ID
      * @param designChartDTO 图表信息
      */
-    void updateChart(Long id, DesignChartDTO designChartDTO);
+    void updateChart(String id, DesignChartDTO designChartDTO);
 
     /**
      * 根据ID删除图表
      *
      * @param id 图表ID
      */
-    void deleteChartById(Long id);
+    void deleteChartById(String id);
 
     /**
      * 查询所有图表

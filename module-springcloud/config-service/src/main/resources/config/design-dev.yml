@@ -2,13 +2,8 @@ spring:
   application:
     name: design
 
-  datasource:
-    url: jdbc:mysql://localhost:3306/easy_show_design?serverTimezone=UTC
-    username: root
-    password: root
-    hikari:
-      maximum-pool-size: 100
-      minimum-idle: 10
-
-  jpa:
-    show-sql: true
+  data:
+    mongodb:
+      host: 192.168.8.148
+      port: 27017
+      database: easy_chart_design

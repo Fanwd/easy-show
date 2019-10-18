@@ -25,7 +25,7 @@ public class DesignDatasourceServiceImpl implements DesignDatasourceService {
     private DesignDatasourceRepository designDatasourceRepository;
 
     @Override
-    public Optional<DesignDatasourceDTO> getDatasourceById(Long id) {
+    public Optional<DesignDatasourceDTO> getDatasourceById(String id) {
         Optional<DesignDatasourceEntity> entity = designDatasourceRepository.findById(id);
         return entity.map(DesignDatasourceDTO::new);
     }
@@ -36,12 +36,12 @@ public class DesignDatasourceServiceImpl implements DesignDatasourceService {
     }
 
     @Override
-    public void updateDatasource(Long id, DesignDatasourceDTO designDatasourceDTO) {
+    public void updateDatasource(String id, DesignDatasourceDTO designDatasourceDTO) {
 
     }
 
     @Override
-    public void deleteDatasourceById(Long id) {
+    public void deleteDatasourceById(String id) {
 
     }
 

@@ -17,7 +17,7 @@ public class DesignDatasourceDTO {
      * 主键ID
      */
     @ApiModelProperty("主键ID")
-    private Long id;
+    private String id;
 
     /**
      * 数据源名称
@@ -104,11 +104,11 @@ public class DesignDatasourceDTO {
         return entity;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -186,8 +186,8 @@ public class DesignDatasourceDTO {
 
     @Override
     public String toString() {
-        return "ChartDatasourceDTO{" +
-                "id=" + id +
+        return "DesignDatasourceDTO{" +
+                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", type=" + type +
                 ", requestUrl='" + requestUrl + '\'' +

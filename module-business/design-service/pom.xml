@@ -24,12 +24,12 @@
         </dependency>
         <dependency>
             <groupId>com.glodon</groupId>
-            <artifactId>jpa</artifactId>
+            <artifactId>swagger</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.glodon</groupId>
-            <artifactId>swagger</artifactId>
+            <artifactId>mongo</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
