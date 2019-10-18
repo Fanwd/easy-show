@@ -1,6 +1,8 @@
 package com.glodon.easyshow.pojo;
 
-import java.util.List;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.Map;
 
 /**
@@ -9,23 +11,28 @@ import java.util.Map;
  * @Author fanwd
  * @Date 2019/10/18 20:01
  **/
+@ApiModel("请求信息")
 public class RequestInfo {
 
     /**
      * 请求地址
      */
+    @ApiModelProperty("请求地址")
     private String url;
     /**
      * 请求方法
      */
+    @ApiModelProperty("请求方法")
     private String method;
     /**
      * 请求头
      */
-    private List<Map<String, String>> headers;
+    @ApiModelProperty("请求头")
+    private Map<String, String> headers;
     /**
      * 请求body
      */
+    @ApiModelProperty("请求body")
     private String body;
 
     public String getUrl() {
@@ -44,11 +51,11 @@ public class RequestInfo {
         this.method = method;
     }
 
-    public List<Map<String, String>> getHeaders() {
+    public Map<String, String> getHeaders() {
         return headers;
     }
 
-    public void setHeaders(List<Map<String, String>> headers) {
+    public void setHeaders(Map<String, String> headers) {
         this.headers = headers;
     }
 
