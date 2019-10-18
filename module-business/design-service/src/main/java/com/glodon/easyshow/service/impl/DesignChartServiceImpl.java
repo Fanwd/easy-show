@@ -34,7 +34,7 @@ public class DesignChartServiceImpl implements DesignChartService {
 
     @Override
     public void addChart(DesignChartDTO designChartDTO) {
-        Assert.notNull(designChartDTO, "Design is null");
+        Assert.notNull(designChartDTO, "Chart is null");
 
         DesignChartEntity entity = designChartDTO.toEntity();
         designChartRepository.save(entity);
@@ -43,10 +43,10 @@ public class DesignChartServiceImpl implements DesignChartService {
     @Override
     public void updateChart(String id, DesignChartDTO designChartDTO) {
         Assert.notNull(id, "Id is null");
-        Assert.notNull(designChartDTO, "Design is null");
+        Assert.notNull(designChartDTO, "Chart is null");
 
         Optional<DesignChartEntity> oldEntityOptional = designChartRepository.findById(id);
-        Assert.isTrue(oldEntityOptional.isPresent(), "Design not exist");
+        Assert.isTrue(oldEntityOptional.isPresent(), "Chart not exist");
 
         DesignChartEntity oldEntity = oldEntityOptional.get();
         oldEntity.setName(designChartDTO.getName());

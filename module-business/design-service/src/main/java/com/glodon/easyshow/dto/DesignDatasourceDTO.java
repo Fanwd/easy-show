@@ -82,7 +82,6 @@ public class DesignDatasourceDTO {
 
     public DesignDatasourceEntity toEntity() {
         DesignDatasourceEntity entity = new DesignDatasourceEntity();
-        entity.setId(this.id);
         entity.setName(this.name);
         entity.setType(this.type);
         entity.setRequestInfo(this.requestInfo);

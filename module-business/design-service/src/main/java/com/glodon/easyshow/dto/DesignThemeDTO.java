@@ -42,7 +42,6 @@ public class DesignThemeDTO {
 
     public DesignThemeEntity toEntity() {
         DesignThemeEntity entity = new DesignThemeEntity();
-        entity.setId(this.id);
         entity.setName(this.name);
         entity.setStyle(this.style);
         return entity;

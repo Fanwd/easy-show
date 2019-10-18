@@ -70,7 +70,6 @@ public class DesignChartDTO {
 
     public DesignChartEntity toEntity() {
         DesignChartEntity entity = new DesignChartEntity();
-        entity.setId(this.id);
         entity.setName(this.name);
         entity.setChartType(this.chartType);
         entity.setStyleType(this.styleType);

@@ -7,9 +7,11 @@ import com.glodon.easyshow.service.DesignDatasourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @ClassName DesignDatasourceServiceImpl
@@ -32,21 +34,40 @@ public class DesignDatasourceServiceImpl implements DesignDatasourceService {
 
     @Override
     public void addDatasource(DesignDatasourceDTO designDatasourceDTO) {
+        Assert.notNull(designDatasourceDTO, "Datasource is null");
 
+        DesignDatasourceEntity entity = designDatasourceDTO.toEntity();
+        designDatasourceRepository.save(entity);
     }
 
     @Override
     public void updateDatasource(String id, DesignDatasourceDTO designDatasourceDTO) {
+        Assert.notNull(id, "Id is null");
+        Assert.notNull(designDatasourceDTO, "Chart is null");
 
+        Optional<DesignDatasourceEntity> oldEntityOptional = designDatasourceRepository.findById(id);
+        Assert.isTrue(oldEntityOptional.isPresent(), "Chart not exist");
+
+        DesignDatasourceEntity oldEntity = oldEntityOptional.get();
+        oldEntity.setName(designDatasourceDTO.getName());
+        oldEntity.setType(designDatasourceDTO.getType());
+        oldEntity.setRequestInfo(designDatasourceDTO.getRequestInfo());
+        oldEntity.setData(designDatasourceDTO.getData());
+        oldEntity.setDataPath(designDatasourceDTO.getDataPath());
+        oldEntity.setDataStructure(designDatasourceDTO.getDataStructure());
+        designDatasourceRepository.save(oldEntity);
     }
 
     @Override
     public void deleteDatasourceById(String id) {
-
+        designDatasourceRepository.deleteById(id);
     }
 
     @Override
     public List<DesignDatasourceDTO> listAll() {
-        return null;
+        List<DesignDatasourceEntity> entityList = designDatasourceRepository.findAll();
+        return entityList.stream()
+                .map(DesignDatasourceDTO::new)
+                .collect(Collectors.toList());
     }
 }
