@@ -3,6 +3,7 @@ package com.glodon.easyshow.service;
 import com.glodon.easyshow.dto.ChartThemeDTO;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @ClassName ChartThemeService
@@ -18,7 +19,7 @@ public interface ChartThemeService {
      * @param id
      * @return
      */
-    ChartThemeDTO getThemeById(Long id);
+    Optional<ChartThemeDTO> getThemeById(Long id);
 
     /**
      * 添加主题

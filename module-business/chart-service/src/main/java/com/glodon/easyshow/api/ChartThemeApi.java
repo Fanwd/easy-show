@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @ClassName ChartThemeApi
@@ -33,8 +34,8 @@ public class ChartThemeApi {
 
     @ApiOperation("根据ID查询主题")
     @GetMapping("/themes/{id}")
-    public JsonResult<ChartThemeDTO> getThemeById(@ApiParam("主题ID") @PathVariable("id") Long id) {
-        ChartThemeDTO result = chartThemeService.getThemeById(id);
+    public JsonResult<Optional<ChartThemeDTO>> getThemeById(@ApiParam("主题ID") @PathVariable("id") Long id) {
+        Optional<ChartThemeDTO> result = chartThemeService.getThemeById(id);
         return JsonResult.success(result);
     }
 

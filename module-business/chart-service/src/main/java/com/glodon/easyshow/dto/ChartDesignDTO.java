@@ -59,15 +59,13 @@ public class ChartDesignDTO {
     }
 
     public ChartDesignDTO(ChartDesignEntity entity) {
-        if (entity != null) {
-            this.id = entity.getId();
-            this.name = entity.getName();
-            this.chartType = entity.getChartType();
-            this.styleType = entity.getStyleType();
-            this.design = entity.getDesign();
-            this.datasourceId = entity.getDatasourceId();
-            this.themeId = entity.getThemeId();
-        }
+        this.id = entity.getId();
+        this.name = entity.getName();
+        this.chartType = entity.getChartType();
+        this.styleType = entity.getStyleType();
+        this.design = entity.getDesign();
+        this.datasourceId = entity.getDatasourceId();
+        this.themeId = entity.getThemeId();
     }
 
     public ChartDesignEntity toEntity() {

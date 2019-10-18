@@ -3,6 +3,7 @@ package com.glodon.easyshow.service;
 import com.glodon.easyshow.dto.ChartDesignDTO;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @ClassName ChartDesignService
@@ -18,7 +19,7 @@ public interface ChartDesignService {
      * @param id
      * @return
      */
-    ChartDesignDTO getDesignById(Long id);
+    Optional<ChartDesignDTO> getDesignById(Long id);
 
     /**
      * 添加图表

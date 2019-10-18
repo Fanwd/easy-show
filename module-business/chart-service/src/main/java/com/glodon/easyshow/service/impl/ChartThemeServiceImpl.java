@@ -28,12 +28,9 @@ public class ChartThemeServiceImpl implements ChartThemeService {
     private ChartThemeRepository chartThemeRepository;
 
     @Override
-    public ChartThemeDTO getThemeById(Long id) {
+    public Optional<ChartThemeDTO> getThemeById(Long id) {
         Optional<ChartThemeEntity> entityOptional = chartThemeRepository.findById(id);
-        if (entityOptional.isPresent()) {
-            return new ChartThemeDTO(entityOptional.get());
-        }
-        return new ChartThemeDTO();
+        return entityOptional.map(ChartThemeDTO::new);
     }
 
     @Override

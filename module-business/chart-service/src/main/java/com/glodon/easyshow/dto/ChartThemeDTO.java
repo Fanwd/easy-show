@@ -32,11 +32,9 @@ public class ChartThemeDTO {
     private String style;
 
     public ChartThemeDTO(ChartThemeEntity entity) {
-        if (null != entity) {
-            this.id = entity.getId();
-            this.name = entity.getName();
-            this.style = entity.getStyle();
-        }
+        this.id = entity.getId();
+        this.name = entity.getName();
+        this.style = entity.getStyle();
     }
 
     public ChartThemeDTO() {

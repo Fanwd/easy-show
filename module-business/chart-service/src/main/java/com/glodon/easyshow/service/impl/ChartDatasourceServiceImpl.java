@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @ClassName ChartDatasourceServiceImpl
@@ -24,9 +25,9 @@ public class ChartDatasourceServiceImpl implements ChartDatasourceService {
     private ChartDatasourceRepository chartDatasourceRepository;
 
     @Override
-    public ChartDatasourceDTO getDatasourceById(Long id) {
-        ChartDatasourceEntity entity = chartDatasourceRepository.getOne(id);
-        return new ChartDatasourceDTO(entity);
+    public Optional<ChartDatasourceDTO> getDatasourceById(Long id) {
+        Optional<ChartDatasourceEntity> entity = chartDatasourceRepository.findById(id);
+        return entity.map(ChartDatasourceDTO::new);
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.glodon.easyshow.service;
 import com.glodon.easyshow.dto.ChartDatasourceDTO;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @ClassName ChartDatasourceService
@@ -18,7 +19,7 @@ public interface ChartDatasourceService {
      * @param id
      * @return
      */
-    ChartDatasourceDTO getDatasourceById(Long id);
+    Optional<ChartDatasourceDTO> getDatasourceById(Long id);
 
     /**
      * 添加数据源

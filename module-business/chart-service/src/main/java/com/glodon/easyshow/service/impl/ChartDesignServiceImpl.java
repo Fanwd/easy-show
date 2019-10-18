@@ -27,9 +27,9 @@ public class ChartDesignServiceImpl implements ChartDesignService {
     private ChartDesignRepository chartDesignRepository;
 
     @Override
-    public ChartDesignDTO getDesignById(Long id) {
-        ChartDesignEntity entity = chartDesignRepository.getOne(id);
-        return new ChartDesignDTO(entity);
+    public Optional<ChartDesignDTO> getDesignById(Long id) {
+        Optional<ChartDesignEntity> entityOptional = chartDesignRepository.findById(id);
+        return entityOptional.map(ChartDesignDTO::new);
     }
 
     @Override

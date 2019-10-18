@@ -77,18 +77,16 @@ public class ChartDatasourceDTO {
     }
 
     public ChartDatasourceDTO(ChartDatasourceEntity entity) {
-        if (entity != null) {
-            this.id = entity.getId();
-            this.name = entity.getName();
-            this.type = entity.getType();
-            this.requestUrl = entity.getRequestUrl();
-            this.requestMethod = entity.getRequestMethod();
-            this.requestHeader = entity.getRequestHeader();
-            this.requestBody = entity.getRequestBody();
-            this.responseBody = entity.getResponseBody();
-            this.staticData = entity.getStaticData();
-            this.dataPath = entity.getDataPath();
-        }
+        this.id = entity.getId();
+        this.name = entity.getName();
+        this.type = entity.getType();
+        this.requestUrl = entity.getRequestUrl();
+        this.requestMethod = entity.getRequestMethod();
+        this.requestHeader = entity.getRequestHeader();
+        this.requestBody = entity.getRequestBody();
+        this.responseBody = entity.getResponseBody();
+        this.staticData = entity.getStaticData();
+        this.dataPath = entity.getDataPath();
     }
 
     public ChartDatasourceEntity toEntity() {
