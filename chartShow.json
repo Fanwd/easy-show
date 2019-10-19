@@ -1,0 +1,19 @@
+{
+  "chartType": "柱状图",
+  "chartStyle": "",
+  "style": {},
+  "data": [
+    {
+      "type": "柱/线/折线/曲线",
+      "name": "分类名称",
+      "yIndex": 0,
+      "point": [
+        {
+          "dim": "纬度",
+          "fact": 100,
+          "ext": "扩展字段"
+        }
+      ]
+    }
+  ]
+}
