@@ -34,6 +34,7 @@ public class DesignDatasourceApi {
 
     @ApiOperation("根据ID查询数据源")
     @GetMapping("/datasources/{id}")
+    @CrossOrigin
     public JsonResult<Optional<DesignDatasourceDTO>> getDatasourceById(@ApiParam("数据源ID") @PathVariable("id") String id) {
         Optional<DesignDatasourceDTO> result = designDatasourceService.getDatasourceById(id);
         return JsonResult.success(result);

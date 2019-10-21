@@ -34,6 +34,7 @@ public class DesignChartApi {
 
     @ApiOperation("根据ID查询图表")
     @GetMapping("/charts/{id}")
+    @CrossOrigin
     public JsonResult<Optional<DesignChartDTO>> getChartById(@ApiParam("图表ID") @PathVariable("id") String id) {
         Optional<DesignChartDTO> result = designChartService.getChartById(id);
         return JsonResult.success(result);
