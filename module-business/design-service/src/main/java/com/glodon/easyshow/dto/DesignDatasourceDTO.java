@@ -6,6 +6,8 @@ import com.glodon.easyshow.pojo.RequestInfo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.List;
+
 /**
  * @ClassName DesignDatasourceDTO
  * @Description: 数据源dto
@@ -55,19 +57,19 @@ public class DesignDatasourceDTO {
      * 数据结构
      */
     @ApiModelProperty("数据结构")
-    private DataStructure dataStructure;
+    private List<DataStructure> dataStructures;
 
     public DesignDatasourceDTO() {
     }
 
-    public DesignDatasourceDTO(String id, String name, Integer type, RequestInfo requestInfo, String data, String dataPath, DataStructure dataStructure) {
+    public DesignDatasourceDTO(String id, String name, Integer type, RequestInfo requestInfo, String data, String dataPath, List<DataStructure> dataStructures) {
         this.id = id;
         this.name = name;
         this.type = type;
         this.requestInfo = requestInfo;
         this.data = data;
         this.dataPath = dataPath;
-        this.dataStructure = dataStructure;
+        this.dataStructures = dataStructures;
     }
 
     public DesignDatasourceDTO(DesignDatasourceEntity entity) {
@@ -77,7 +79,7 @@ public class DesignDatasourceDTO {
         this.requestInfo = entity.getRequestInfo();
         this.data = entity.getData();
         this.dataPath = entity.getDataPath();
-        this.dataStructure = entity.getDataStructure();
+        this.dataStructures = entity.getDataStructures();
     }
 
     public DesignDatasourceEntity toEntity() {
@@ -87,7 +89,7 @@ public class DesignDatasourceDTO {
         entity.setRequestInfo(this.requestInfo);
         entity.setData(this.data);
         entity.setDataPath(this.dataPath);
-        entity.setDataStructure(this.dataStructure);
+        entity.setDataStructures(this.dataStructures);
         return entity;
     }
 
@@ -139,12 +141,12 @@ public class DesignDatasourceDTO {
         this.dataPath = dataPath;
     }
 
-    public DataStructure getDataStructure() {
-        return dataStructure;
+    public List<DataStructure> getDataStructures() {
+        return dataStructures;
     }
 
-    public void setDataStructure(DataStructure dataStructure) {
-        this.dataStructure = dataStructure;
+    public void setDataStructures(List<DataStructure> dataStructures) {
+        this.dataStructures = dataStructures;
     }
 
     @Override
@@ -156,7 +158,7 @@ public class DesignDatasourceDTO {
                 ", requestInfo=" + requestInfo +
                 ", data='" + data + '\'' +
                 ", dataPath='" + dataPath + '\'' +
-                ", dataStructure=" + dataStructure +
+                ", dataStructures=" + dataStructures +
                 '}';
     }
 }

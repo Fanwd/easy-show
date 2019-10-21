@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 数据源信息
@@ -53,8 +54,8 @@ public class DesignDatasourceEntity implements Serializable {
     /**
      * 数据结构
      */
-    @Field("data_structure")
-    private DataStructure dataStructure;
+    @Field("data_structures")
+    private List<DataStructure> dataStructures;
 
     public String getId() {
         return id;
@@ -104,12 +105,12 @@ public class DesignDatasourceEntity implements Serializable {
         this.dataPath = dataPath;
     }
 
-    public DataStructure getDataStructure() {
-        return dataStructure;
+    public List<DataStructure> getDataStructures() {
+        return dataStructures;
     }
 
-    public void setDataStructure(DataStructure dataStructure) {
-        this.dataStructure = dataStructure;
+    public void setDataStructures(List<DataStructure> dataStructures) {
+        this.dataStructures = dataStructures;
     }
 
     @Override
@@ -121,7 +122,7 @@ public class DesignDatasourceEntity implements Serializable {
                 ", requestInfo=" + requestInfo +
                 ", data='" + data + '\'' +
                 ", dataPath='" + dataPath + '\'' +
-                ", dataStructure=" + dataStructure +
+                ", dataStructures=" + dataStructures +
                 '}';
     }
 }
