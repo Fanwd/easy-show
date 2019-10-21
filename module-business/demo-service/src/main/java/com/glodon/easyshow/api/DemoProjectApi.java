@@ -6,6 +6,7 @@ import com.glodon.easyshow.result.JsonResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,6 +27,7 @@ public class DemoProjectApi {
 
     @ApiOperation("查询所有项目信息")
     @GetMapping("/projects")
+    @CrossOrigin
     public JsonResult<List<Project>> listAllProject() {
         List<Project> result = projectRepository.listAllProject();
         return JsonResult.success(result);
