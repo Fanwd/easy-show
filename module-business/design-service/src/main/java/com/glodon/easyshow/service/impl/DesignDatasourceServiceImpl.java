@@ -54,7 +54,7 @@ public class DesignDatasourceServiceImpl implements DesignDatasourceService {
         oldEntity.setRequestInfo(designDatasourceDTO.getRequestInfo());
         oldEntity.setData(designDatasourceDTO.getData());
         oldEntity.setDataPath(designDatasourceDTO.getDataPath());
-        oldEntity.setDataStructure(designDatasourceDTO.getDataStructure());
+        oldEntity.setDataStructures(designDatasourceDTO.getDataStructures());
         designDatasourceRepository.save(oldEntity);
     }
 
