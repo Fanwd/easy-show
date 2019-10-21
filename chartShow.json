@@ -2,16 +2,14 @@
   "chartType": "柱状图",
   "chartStyle": "",
   "style": {},
-  "data": [
+  "series": [
     {
       "type": "柱/线/折线/曲线",
       "name": "分类名称",
-      "yIndex": 0,
-      "point": [
+      "data": [
         {
-          "dim": "纬度",
-          "fact": 100,
-          "ext": "扩展字段"
+          "x": "纬度",
+          "y": 100
         }
       ]
     }
