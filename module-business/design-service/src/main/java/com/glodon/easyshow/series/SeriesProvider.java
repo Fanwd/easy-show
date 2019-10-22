@@ -4,6 +4,7 @@ import com.glodon.easyshow.dto.DesignChartDTO;
 import com.glodon.easyshow.enums.ChartEnum;
 import com.glodon.easyshow.pojo.ChartResult;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -17,5 +18,5 @@ public interface SeriesProvider {
 
     ChartEnum chartType();
 
-    ChartResult series(DesignChartDTO designChartDTO, List<Map<String, Object>> dataList);
+    ChartResult series(DesignChartDTO designChartDTO, List<Map<String, Object>> dataList) throws IOException;
 }

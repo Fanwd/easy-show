@@ -1,5 +1,7 @@
 package com.glodon.easyshow.design;
 
+import org.springframework.util.StringUtils;
+
 import java.util.List;
 
 /**
@@ -105,6 +107,19 @@ public class YAxisConfig {
 
     public void setFilter(List<Filter> filter) {
         this.filter = filter;
+    }
+
+    /**
+     * 获取显示名称
+     *
+     * @return
+     */
+    public String getShowName() {
+        // 优先取别名，如果没有，则用字段名
+        if (!StringUtils.isEmpty(this.aliasName)) {
+            return this.aliasName;
+        }
+        return this.name;
     }
 
     @Override
