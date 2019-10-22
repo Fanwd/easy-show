@@ -54,9 +54,12 @@ public class ColumnNormalProvider implements SeriesProvider {
         List<String> xDataList = new ArrayList<>();
         xAxis.setData(xDataList);
         xAxis.setxAxisField(field);
+
         dataList.forEach(map -> {
             Object name = map.get(field);
-            xDataList.add(String.valueOf(name));
+            if (!xDataList.contains(String.valueOf(name))) {
+                xDataList.add(String.valueOf(name));
+            }
         });
         chartResult.setxAxis(xAxis);
         chartResult.setyAxis(new YAxis());
@@ -111,13 +114,18 @@ public class ColumnNormalProvider implements SeriesProvider {
             series.setType(ChartColumnTypeEnum.BAR.getType());
             series.setName(yAxisConfig.getShowName());
             List<Double> seriesDataList = new ArrayList<>();
+            series.setData(seriesDataList);
             for (String dim : xAxisDataList) {
                 // 计算方式组内求和
                 Double sum = 0.0;
                 for (Map<String, Object> item : dataList) {
                     Object fieldValue = item.get(fieldName);
-                    if (dim.equals(item.get(xAxisField)) && !StringUtils.isEmpty(fieldValue)) {
-                        sum += Double.valueOf(String.valueOf(fieldValue));
+                    if (null == fieldValue) {
+                        continue;
+                    }
+                    String stringFieldValue = String.valueOf(fieldValue);
+                    if (dim.equals(String.valueOf(item.get(xAxisField))) && !StringUtils.isEmpty(stringFieldValue)) {
+                        sum += Double.valueOf(stringFieldValue);
                     }
                 }
                 seriesDataList.add(sum);

@@ -1,5 +1,7 @@
 package com.glodon.easyshow.design;
 
+import java.util.List;
+
 /**
  * @ClassName TypeField
  * @Description 一级分类
@@ -23,7 +25,7 @@ public class TypeField {
     /**
      * 过滤规则
      */
-    private Filter filter;
+    private List<Filter> filter;
 
     public String getField() {
         return field;
@@ -49,11 +51,11 @@ public class TypeField {
         this.sort = sort;
     }
 
-    public Filter getFilter() {
+    public List<Filter> getFilter() {
         return filter;
     }
 
-    public void setFilter(Filter filter) {
+    public void setFilter(List<Filter> filter) {
         this.filter = filter;
     }
 

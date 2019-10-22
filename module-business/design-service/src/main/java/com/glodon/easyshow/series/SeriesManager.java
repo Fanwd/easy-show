@@ -49,7 +49,7 @@ public class SeriesManager {
      * @param designChartDTO
      * @return
      */
-    public ChartResult seriesData(DesignChartDTO designChartDTO) {
+    public ChartResult seriesData(DesignChartDTO designChartDTO) throws IOException {
         if (null == designChartDTO) {
             return null;
         }
@@ -85,7 +85,7 @@ public class SeriesManager {
                 if (dataList.isEmpty()) {
                     return null;
                 }
-                return seriesProvider.series(designChartDTO, null);
+                return seriesProvider.series(designChartDTO, dataList);
             }
         }
         return null;
@@ -115,9 +115,9 @@ public class SeriesManager {
             }
             if (jsonNode != null) {
                 if (jsonNode.isArray()) {
-                    dataList.addAll(objectMapper.readValue(jsonNode.asText(), List.class));
+                    dataList.addAll(objectMapper.readValue(jsonNode.toString(), List.class));
                 } else if (jsonNode.isObject()) {
-                    Map map = objectMapper.readValue(jsonNode.asText(), Map.class);
+                    Map map = objectMapper.readValue(jsonNode.toString(), Map.class);
                     dataList.add(map);
                 }
             }

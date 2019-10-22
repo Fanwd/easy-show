@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,8 +26,8 @@ public class ChartDataApi {
     private ChartDataService chartDataService;
 
     @ApiOperation("获取图表展示数据")
-    @GetMapping("/chart_dates")
-    public JsonResult<ChartResult> series(@ApiParam("图表ID") @RequestParam("id") String id) {
+    @GetMapping("/chart_dates/{id}")
+    public JsonResult<ChartResult> series(@ApiParam("图表ID") @PathVariable("id") String id) {
         ChartResult result = chartDataService.getResultById(id);
         return JsonResult.success(result);
     }
