@@ -51,7 +51,8 @@ public class DesignChartServiceImpl implements DesignChartService {
         DesignChartEntity oldEntity = oldEntityOptional.get();
         oldEntity.setName(designChartDTO.getName());
         oldEntity.setChartType(designChartDTO.getChartType());
-        oldEntity.setStyleType(designChartDTO.getStyleType());
+        oldEntity.setChartStyle(designChartDTO.getChartStyle());
+        oldEntity.setStyle(designChartDTO.getStyle());
         oldEntity.setDesign(designChartDTO.getDesign());
         oldEntity.setDatasourceId(designChartDTO.getDatasourceId());
         oldEntity.setThemeId(designChartDTO.getThemeId());

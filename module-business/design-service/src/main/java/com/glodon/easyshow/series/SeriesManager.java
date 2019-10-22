@@ -55,7 +55,7 @@ public class SeriesManager {
         }
         for (SeriesProvider seriesProvider : seriesProviderList) {
             ChartEnum chartEnum = seriesProvider.chartType();
-            if (chartEnum.getType().equals(designChartDTO.getChartType()) && chartEnum.getStyle().equals(designChartDTO.getStyleType())) {
+            if (chartEnum.getType().equals(designChartDTO.getChartType()) && chartEnum.getStyle().equals(designChartDTO.getChartStyle())) {
                 // 获取数据源信息
                 String datasourceId = designChartDTO.getDatasourceId();
                 Optional<DesignDatasourceDTO> datasource = designDatasourceService.getDatasourceById(datasourceId);

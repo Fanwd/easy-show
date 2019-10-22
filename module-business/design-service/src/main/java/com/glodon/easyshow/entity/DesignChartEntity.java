@@ -33,8 +33,14 @@ public class DesignChartEntity implements Serializable {
     /**
      * 图表风格
      */
-    @Field("style_type")
-    private String styleType;
+    @Field("chart_style")
+    private String chartStyle;
+
+    /**
+     * 图表样式
+     */
+    @Field("style")
+    private String style;
 
     /**
      * 图表设计
@@ -70,6 +76,14 @@ public class DesignChartEntity implements Serializable {
         this.name = name;
     }
 
+    public String getStyle() {
+        return style;
+    }
+
+    public void setStyle(String style) {
+        this.style = style;
+    }
+
     public String getChartType() {
         return chartType;
     }
@@ -78,12 +92,12 @@ public class DesignChartEntity implements Serializable {
         this.chartType = chartType;
     }
 
-    public String getStyleType() {
-        return styleType;
+    public String getChartStyle() {
+        return chartStyle;
     }
 
-    public void setStyleType(String styleType) {
-        this.styleType = styleType;
+    public void setChartStyle(String chartStyle) {
+        this.chartStyle = chartStyle;
     }
 
     public String getDesign() {
@@ -116,7 +130,8 @@ public class DesignChartEntity implements Serializable {
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", chartType='" + chartType + '\'' +
-                ", styleType='" + styleType + '\'' +
+                ", chartStyle='" + chartStyle + '\'' +
+                ", style='" + style + '\'' +
                 ", design='" + design + '\'' +
                 ", datasourceId='" + datasourceId + '\'' +
                 ", themeId='" + themeId + '\'' +

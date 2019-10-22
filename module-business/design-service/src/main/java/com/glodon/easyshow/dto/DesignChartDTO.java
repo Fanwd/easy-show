@@ -28,14 +28,20 @@ public class DesignChartDTO {
     /**
      * 图表类型
      */
-    @ApiModelProperty("图表类型")
+    @ApiModelProperty("图表类型(柱状图、饼状图)")
     private String chartType;
 
     /**
      * 图表风格
      */
-    @ApiModelProperty("图表风格")
-    private String styleType;
+    @ApiModelProperty("图表风格（普通柱状图、堆积柱状图）")
+    private String chartStyle;
+
+    /**
+     * 图表样式
+     */
+    @ApiModelProperty("图表样式")
+    private String style;
 
     /**
      * 图表设计
@@ -62,7 +68,8 @@ public class DesignChartDTO {
         this.id = entity.getId();
         this.name = entity.getName();
         this.chartType = entity.getChartType();
-        this.styleType = entity.getStyleType();
+        this.chartStyle = entity.getChartStyle();
+        this.style = entity.getStyle();
         this.design = entity.getDesign();
         this.datasourceId = entity.getDatasourceId();
         this.themeId = entity.getThemeId();
@@ -72,7 +79,8 @@ public class DesignChartDTO {
         DesignChartEntity entity = new DesignChartEntity();
         entity.setName(this.name);
         entity.setChartType(this.chartType);
-        entity.setStyleType(this.styleType);
+        entity.setChartStyle(this.chartStyle);
+        entity.setStyle(this.style);
         entity.setDesign(this.design);
         entity.setDatasourceId(this.datasourceId);
         entity.setThemeId(this.themeId);
@@ -103,12 +111,20 @@ public class DesignChartDTO {
         this.chartType = chartType;
     }
 
-    public String getStyleType() {
-        return styleType;
+    public String getChartStyle() {
+        return chartStyle;
     }
 
-    public void setStyleType(String styleType) {
-        this.styleType = styleType;
+    public void setChartStyle(String chartStyle) {
+        this.chartStyle = chartStyle;
+    }
+
+    public String getStyle() {
+        return style;
+    }
+
+    public void setStyle(String style) {
+        this.style = style;
     }
 
     public String getDesign() {
@@ -141,7 +157,8 @@ public class DesignChartDTO {
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", chartType='" + chartType + '\'' +
-                ", styleType='" + styleType + '\'' +
+                ", chartStyle='" + chartStyle + '\'' +
+                ", style='" + style + '\'' +
                 ", design='" + design + '\'' +
                 ", datasourceId='" + datasourceId + '\'' +
                 ", themeId='" + themeId + '\'' +
