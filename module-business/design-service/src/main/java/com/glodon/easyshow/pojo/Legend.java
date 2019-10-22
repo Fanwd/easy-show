@@ -1,4 +1,4 @@
-package com.glodon.easyshow.series;
+package com.glodon.easyshow.pojo;
 
 import java.util.List;
 
