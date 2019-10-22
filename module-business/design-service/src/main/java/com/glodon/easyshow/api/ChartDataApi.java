@@ -2,9 +2,11 @@ package com.glodon.easyshow.api;
 
 import com.glodon.easyshow.pojo.ChartResult;
 import com.glodon.easyshow.result.JsonResult;
+import com.glodon.easyshow.service.ChartDataService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,12 +21,13 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "图表数据API")
 public class ChartDataApi {
 
+    @Autowired
+    private ChartDataService chartDataService;
+
     @ApiOperation("获取图表展示数据")
     @GetMapping("/chart_dates")
     public JsonResult<ChartResult> series(@ApiParam("图表ID") @RequestParam("id") String id) {
-
-
-
-        return JsonResult.success();
+        ChartResult result = chartDataService.getResultById(id);
+        return JsonResult.success(result);
     }
 }
