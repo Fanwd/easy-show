@@ -31,7 +31,7 @@ public class ColumnNormalProvider implements SeriesProvider {
 
     @Override
     public ChartEnum chartType() {
-        return ChartEnum.COLUMN_NORMAL;
+        return ChartEnum.NORMAL_BAR;
     }
 
     @Override
@@ -77,7 +77,9 @@ public class ColumnNormalProvider implements SeriesProvider {
             String seriesFieldId = seriesField.getField();
             dataList.forEach(map -> {
                 Object name = map.get(seriesFieldId);
-                legendDataList.add(String.valueOf(name));
+                if (!legendDataList.contains(String.valueOf(name))) {
+                    legendDataList.add(String.valueOf(name));
+                }
             });
         } else {
             if (!CollectionUtils.isEmpty(yAxisConfigList)) {

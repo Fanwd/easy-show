@@ -9,23 +9,21 @@ package com.glodon.easyshow.enums;
 public enum ChartEnum {
 
     /**
-     * 柱状图-普通柱状图
+     * 普通柱状图
      */
-    COLUMN_NORMAL("column", "column_normal");
+    NORMAL_BAR("normal_bar"),
+    /**
+     * 堆积柱状图
+     */
+    STACK_BAR("stack_bar");
 
     private String type;
-    private String style;
 
-    ChartEnum(String type, String style) {
+    ChartEnum(String type) {
         this.type = type;
-        this.style = style;
     }
 
     public String getType() {
         return type;
-    }
-
-    public String getStyle() {
-        return style;
     }
 }
