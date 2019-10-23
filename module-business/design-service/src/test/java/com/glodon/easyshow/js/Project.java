@@ -106,4 +106,18 @@ public class Project {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", province='" + province + '\'' +
+                ", city='" + city + '\'' +
+                ", planValue=" + planValue +
+                ", realValue=" + realValue +
+                ", constructValue=" + constructValue +
+                ", status='" + status + '\'' +
+                '}';
+    }
 }

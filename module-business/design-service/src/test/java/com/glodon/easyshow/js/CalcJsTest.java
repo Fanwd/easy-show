@@ -1,11 +1,8 @@
 package com.glodon.easyshow.js;
 
-import com.glodon.easyshow.dto.DesignThemeDTO;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import javax.script.Invocable;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
+import javax.script.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -40,16 +37,72 @@ public class CalcJsTest {
 
         String design = "{\"xAxisConfig\":{\"typeField\":{\"field\":\"province\",\"aliasName\":\"省份\",\"sort\":{\"sortBy\":\"x\",\"sortName\":\"省份\",\"sortType\":\"asc\"},\"filter\":[]},\"seriesField\":{}},\"yAxisConfig\":[{\"type\":\"field\",\"name\":\"planValue\",\"showType\":\"bar\",\"yIndex\":\"0\",\"aliasName\":\"计划产值\",\"calcType\":\"\",\"isVisible\":true,\"filter\":[]},{\"type\":\"field\",\"name\":\"realValue\",\"showType\":\"bar\",\"yIndex\":\"0\",\"aliasName\":\"实际产值\",\"calcType\":\"\",\"isVisible\":true,\"filter\":[]},{\"type\":\"field\",\"name\":\"constructValue\",\"showType\":\"bar\",\"yIndex\":\"0\",\"aliasName\":\"合同额\",\"calcType\":\"\",\"isVisible\":true,\"filter\":[]}]}";
 
+        // js引擎
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByExtension("js");
+
+        // js文件
+        InputStream resourceAsStream = CalcJsTest.class.getClassLoader().getResourceAsStream("calcjs/EasyDashboard.umd.min.js");
+        InputStreamReader inputStreamReader = new InputStreamReader(resourceAsStream);
+        engine.eval(inputStreamReader);
+
+        if (engine instanceof Invocable) {
+            // 执行js
+            Invocable invocable = (Invocable) engine;
+
+            Map<String, String> map = new HashMap<>();
+            map.put("key", "5daae43a50ef314a68d292eb");
+            map.put("dom", "document.body");
+
+            Object obj = engine.get("EasyDashboard");
+            Object result = invocable.invokeMethod(obj, "init", map);
+//            Object result = invocable.invokeFunction("obj.test", design, projectList);
+            ObjectMapper objectMapper = new ObjectMapper();
+            System.out.println("执行结果" + objectMapper.writeValueAsString(result));
+        }
+    }
+
+    private static void runOri() throws ScriptException, NoSuchMethodException {
+        String design = "{\"xAxisConfig\":{\"typeField\":{\"field\":\"province\",\"aliasName\":\"省份\",\"sort\":{\"sortBy\":\"x\",\"sortName\":\"省份\",\"sortType\":\"asc\"},\"filter\":[]},\"seriesField\":{}},\"yAxisConfig\":[{\"type\":\"field\",\"name\":\"planValue\",\"showType\":\"bar\",\"yIndex\":\"0\",\"aliasName\":\"计划产值\",\"calcType\":\"\",\"isVisible\":true,\"filter\":[]},{\"type\":\"field\",\"name\":\"realValue\",\"showType\":\"bar\",\"yIndex\":\"0\",\"aliasName\":\"实际产值\",\"calcType\":\"\",\"isVisible\":true,\"filter\":[]},{\"type\":\"field\",\"name\":\"constructValue\",\"showType\":\"bar\",\"yIndex\":\"0\",\"aliasName\":\"合同额\",\"calcType\":\"\",\"isVisible\":true,\"filter\":[]}]}";
+
+        ScriptEngineManager manager = new ScriptEngineManager();
+        ScriptEngine engine = manager.getEngineByExtension("js");
+
         InputStream resourceAsStream = CalcJsTest.class.getClassLoader().getResourceAsStream("calcjs/series.js");
         InputStreamReader inputStreamReader = new InputStreamReader(resourceAsStream);
+
         engine.eval(inputStreamReader);
         if (engine instanceof Invocable) {
             Invocable invocable = (Invocable) engine;
-            Object test = invocable.invokeFunction("parseConfig", design, projectList);
-            System.out.println(String.valueOf(test));
-        }
 
+            for (int i = 0; i < 1000; i++) {
+                Object result = invocable.invokeFunction("parseConfig", design, projectList);
+                System.out.println("--" + result);
+            }
+        }
+    }
+
+    private static void runCompil() throws ScriptException, NoSuchMethodException {
+        String design = "{\"xAxisConfig\":{\"typeField\":{\"field\":\"province\",\"aliasName\":\"省份\",\"sort\":{\"sortBy\":\"x\",\"sortName\":\"省份\",\"sortType\":\"asc\"},\"filter\":[]},\"seriesField\":{}},\"yAxisConfig\":[{\"type\":\"field\",\"name\":\"planValue\",\"showType\":\"bar\",\"yIndex\":\"0\",\"aliasName\":\"计划产值\",\"calcType\":\"\",\"isVisible\":true,\"filter\":[]},{\"type\":\"field\",\"name\":\"realValue\",\"showType\":\"bar\",\"yIndex\":\"0\",\"aliasName\":\"实际产值\",\"calcType\":\"\",\"isVisible\":true,\"filter\":[]},{\"type\":\"field\",\"name\":\"constructValue\",\"showType\":\"bar\",\"yIndex\":\"0\",\"aliasName\":\"合同额\",\"calcType\":\"\",\"isVisible\":true,\"filter\":[]}]}";
+
+        ScriptEngineManager manager = new ScriptEngineManager();
+        ScriptEngine engine = manager.getEngineByExtension("js");
+
+        InputStream resourceAsStream = CalcJsTest.class.getClassLoader().getResourceAsStream("calcjs/series.js");
+        InputStreamReader inputStreamReader = new InputStreamReader(resourceAsStream);
+
+        if (engine instanceof Compilable) {
+            Compilable compilable = (Compilable) engine;
+            CompiledScript compiledScript = compilable.compile(inputStreamReader);
+            compiledScript.eval();
+            ScriptEngine scriptEngine = compiledScript.getEngine();
+            if (scriptEngine instanceof Invocable) {
+                Invocable invocable = (Invocable) scriptEngine;
+                for (int i = 0; i < 1000; i++) {
+                    Object result = invocable.invokeFunction("parseConfig", design, projectList);
+                    System.out.println("--" + result);
+                }
+            }
+        }
     }
 }
