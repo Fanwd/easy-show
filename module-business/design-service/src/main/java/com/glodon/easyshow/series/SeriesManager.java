@@ -4,19 +4,22 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.glodon.easyshow.dto.DesignChartDTO;
 import com.glodon.easyshow.dto.DesignDatasourceDTO;
-import com.glodon.easyshow.enums.ChartEnum;
 import com.glodon.easyshow.enums.DatasourceTypeEnum;
-import com.glodon.easyshow.pojo.ChartResult;
 import com.glodon.easyshow.pojo.RequestInfo;
 import com.glodon.easyshow.service.DesignDatasourceService;
 import com.glodon.easyshow.service.ProxyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.script.*;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.util.*;
 
@@ -27,10 +30,7 @@ import java.util.*;
  * @Date 2019/10/22 10:39
  **/
 @Service
-public class SeriesManager {
-
-    @Autowired
-    private List<SeriesProvider> seriesProviderList;
+public class SeriesManager implements InitializingBean {
 
     @Autowired
     private DesignDatasourceService designDatasourceService;
@@ -41,6 +41,12 @@ public class SeriesManager {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private SeriesJsCalcProperties seriesJsCalcProperties;
+
+    private ScriptEngine scriptEngine;
+    private Invocable invocable;
+
     private static final Logger logger = LoggerFactory.getLogger(SeriesManager.class);
 
     /**
@@ -49,46 +55,52 @@ public class SeriesManager {
      * @param designChartDTO
      * @return
      */
-    public ChartResult seriesData(DesignChartDTO designChartDTO) throws IOException {
+    public Object seriesData(DesignChartDTO designChartDTO) {
         if (null == designChartDTO) {
             return null;
         }
-        for (SeriesProvider seriesProvider : seriesProviderList) {
-            ChartEnum chartEnum = seriesProvider.chartType();
-            if (chartEnum.getType().equals(designChartDTO.getChartType())) {
-                // 获取数据源信息
-                String datasourceId = designChartDTO.getDatasourceId();
-                Optional<DesignDatasourceDTO> datasource = designDatasourceService.getDatasourceById(datasourceId);
-                if (null == datasource || !datasource.isPresent()) {
-                    return null;
-                }
-                DesignDatasourceDTO datasourceDTO = datasource.get();
-                Integer type = datasourceDTO.getType();
-                String data = "";
-                if (DatasourceTypeEnum.STATIC.getType().equals(type)) {
-                    data = datasourceDTO.getData();
-                } else if (DatasourceTypeEnum.DYNAMIC.getType().equals(type)) {
-                    RequestInfo requestInfo = datasourceDTO.getRequestInfo();
-                    try {
-                        data = proxyService.requestData(requestInfo);
-                    } catch (URISyntaxException e) {
-                        logger.warn("代理请求异常 datasourceId[{}], requestInfo[{}]", datasourceId, requestInfo, e);
-                        // 默认取缓存数据
-                        data = datasourceDTO.getData();
-                    }
-                }
-                if (StringUtils.isEmpty(data)) {
-                    return null;
-                }
-                String dataPath = datasourceDTO.getDataPath();
-                List<Map<String, Object>> dataList = readData(data, dataPath);
-                if (dataList.isEmpty()) {
-                    return null;
-                }
-                return seriesProvider.series(designChartDTO, dataList);
+        // 获取数据源信息
+        String datasourceId = designChartDTO.getDatasourceId();
+        Optional<DesignDatasourceDTO> datasource = designDatasourceService.getDatasourceById(datasourceId);
+        if (null == datasource || !datasource.isPresent()) {
+            return null;
+        }
+        DesignDatasourceDTO datasourceDTO = datasource.get();
+        Integer type = datasourceDTO.getType();
+        String data = "";
+        if (DatasourceTypeEnum.STATIC.getType().equals(type)) {
+            data = datasourceDTO.getData();
+        } else if (DatasourceTypeEnum.DYNAMIC.getType().equals(type)) {
+            RequestInfo requestInfo = datasourceDTO.getRequestInfo();
+            try {
+                data = proxyService.requestData(requestInfo);
+            } catch (URISyntaxException e) {
+                logger.warn("代理请求异常 datasourceId[{}], requestInfo[{}]", datasourceId, requestInfo, e);
+                // 默认取缓存数据
+                data = datasourceDTO.getData();
             }
         }
+        if (StringUtils.isEmpty(data)) {
+            return null;
+        }
+        try {
+            return this.series(designChartDTO, data);
+        } catch (ScriptException e) {
+            logger.warn("脚本执行异常designChartDTO[{}], data", designChartDTO, data, e);
+        } catch (NoSuchMethodException e) {
+            logger.warn("脚本中无此方法designChartDTO[{}], data", designChartDTO, data, e);
+        }
         return null;
+    }
+
+    private Object series(DesignChartDTO designChartDTO, String data) throws ScriptException, NoSuchMethodException {
+        String objectName = seriesJsCalcProperties.getObjectName();
+        if (StringUtils.isEmpty(objectName)) {
+            return this.invocable.invokeFunction(seriesJsCalcProperties.getMethodName(), designChartDTO, data);
+        } else {
+            Object obj = scriptEngine.get(objectName);
+            return this.invocable.invokeMethod(obj, seriesJsCalcProperties.getMethodName(), designChartDTO, data);
+        }
     }
 
     /**
@@ -128,4 +140,22 @@ public class SeriesManager {
         }
     }
 
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        ScriptEngineManager scriptEngineManager = new ScriptEngineManager(this.getClass().getClassLoader());
+        ScriptEngine scriptEngine = scriptEngineManager.getEngineByExtension("js");
+        InputStream jsStream = this.getClass().getClassLoader().getResourceAsStream(seriesJsCalcProperties.getJsName());
+        if (jsStream == null) {
+            throw new FileNotFoundException(seriesJsCalcProperties.getJsName());
+        }
+        InputStreamReader jsReader = new InputStreamReader(jsStream);
+        if (scriptEngine instanceof Compilable) {
+            CompiledScript compiledScript = ((Compilable) scriptEngine).compile(jsReader);
+            compiledScript.eval();
+            this.scriptEngine = scriptEngine;
+        }
+        if (scriptEngine instanceof Invocable) {
+            this.invocable = ((Invocable) scriptEngine);
+        }
+    }
 }

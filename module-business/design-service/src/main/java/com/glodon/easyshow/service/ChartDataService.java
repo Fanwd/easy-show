@@ -16,6 +16,6 @@ public interface ChartDataService {
      * @param id
      * @return
      */
-    ChartResult getResultById(String id);
+    Object getResultById(String id);
 
 }

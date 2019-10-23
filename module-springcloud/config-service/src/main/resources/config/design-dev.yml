@@ -7,3 +7,10 @@ spring:
       host: 192.168.8.148
       port: 27017
       database: easy_chart_design
+
+design:
+  series:
+    calc:
+      jsName: calcjs/EasyDashboard.umd.min.js
+      objectName: EasyDashboard
+      methodName: init
