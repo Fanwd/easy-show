@@ -1,6 +1,7 @@
 package com.glodon.easyshow.entity;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -52,6 +53,7 @@ public class DesignChartEntity implements Serializable {
      * 数据源id
      */
     @Field("datasource_id")
+    @Indexed
     private String datasourceId;
 
     /**

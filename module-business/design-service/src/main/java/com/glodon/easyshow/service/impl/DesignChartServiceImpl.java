@@ -33,6 +33,16 @@ public class DesignChartServiceImpl implements DesignChartService {
     }
 
     @Override
+    public List<DesignChartDTO> listChartByDatasourceId(String id) {
+        Assert.notNull(id, "Datasource id is null");
+
+        List<DesignChartEntity> entityList = designChartRepository.findByDatasourceId(id);
+        return entityList.stream()
+                .map(DesignChartDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public void addChart(DesignChartDTO designChartDTO) {
         Assert.notNull(designChartDTO, "Chart is null");
 

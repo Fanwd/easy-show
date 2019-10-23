@@ -1,7 +1,9 @@
 package com.glodon.easyshow.api;
 
+import com.glodon.easyshow.dto.DesignChartDTO;
 import com.glodon.easyshow.dto.DesignDatasourceDTO;
 import com.glodon.easyshow.result.JsonResult;
+import com.glodon.easyshow.service.DesignChartService;
 import com.glodon.easyshow.service.DesignDatasourceService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,6 +27,9 @@ public class DesignDatasourceApi {
     @Autowired
     DesignDatasourceService designDatasourceService;
 
+    @Autowired
+    DesignChartService designChartService;
+
     @ApiOperation("获取所有数据源")
     @GetMapping("/datasources")
     public JsonResult<List<DesignDatasourceDTO>> listAllDatasource() {
@@ -37,6 +42,13 @@ public class DesignDatasourceApi {
     @CrossOrigin
     public JsonResult<Optional<DesignDatasourceDTO>> getDatasourceById(@ApiParam("数据源ID") @PathVariable("id") String id) {
         Optional<DesignDatasourceDTO> result = designDatasourceService.getDatasourceById(id);
+        return JsonResult.success(result);
+    }
+
+    @ApiOperation("根据数据源ID查询图表")
+    @GetMapping("/datasources/{id}/charts")
+    public JsonResult<List<DesignChartDTO>> listByDatasourceId(@ApiParam("数据源ID") @PathVariable("id") String id) {
+        List<DesignChartDTO> result = designChartService.listChartByDatasourceId(id);
         return JsonResult.success(result);
     }
 
