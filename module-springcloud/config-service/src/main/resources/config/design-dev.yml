@@ -16,6 +16,6 @@ spring:
 design:
   series:
     calc:
-      jsName: calcjs/EasyDashboard.umd.min.js
-      objectName: EasyDashboard
-      methodName: init
+      jsName: calcjs/ChartCalculator.umd.min.js
+      objectName: ChartCalculator
+      methodName: parseDesign

@@ -93,7 +93,11 @@ public class SeriesManager implements InitializingBean {
             return this.invocable.invokeFunction(seriesJsCalcProperties.getMethodName(), designChartDTO, data);
         } else {
             Object obj = scriptEngine.get(objectName);
-            return this.invocable.invokeMethod(obj, seriesJsCalcProperties.getMethodName(), designChartDTO, data);
+            Map<String, Object> map = new HashMap<>();
+            map.put("raw", data);
+            map.put("design", designChartDTO.getDesign());
+            map.put("isJSON", false);
+            return this.invocable.invokeMethod(obj, seriesJsCalcProperties.getMethodName(), map);
         }
     }
 
@@ -104,6 +108,7 @@ public class SeriesManager implements InitializingBean {
      * @param dataPath
      * @return
      */
+    @Deprecated
     private List<Map<String, Object>> readData(String data, String dataPath) {
         try {
             List<Map<String, Object>> dataList = new ArrayList<>();
