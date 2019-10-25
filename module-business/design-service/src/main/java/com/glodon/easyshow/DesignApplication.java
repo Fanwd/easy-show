@@ -3,6 +3,8 @@ package com.glodon.easyshow;
 import com.glodon.easyshow.anno.EnableSwaggerDoc;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.EnableCaching;
 
 /**
  * @Author: fanwd
@@ -10,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Date: Create in 20:43 2019/10/13
  */
 @SpringBootApplication
+//@EnableCaching
 @EnableSwaggerDoc(groupName = "图表设计服务", prefix = "com.glodon.easyshow.api")
 public class DesignApplication {
     public static void main(String[] args) {

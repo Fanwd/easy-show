@@ -4,6 +4,8 @@ import com.glodon.easyshow.entity.DesignThemeEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.io.Serializable;
+
 /**
  * @ClassName DesignThemeDTO
  * @Description: 主题dto
@@ -11,7 +13,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @Date: Create in 23:09 2019/10/15
  */
 @ApiModel("主题DTO")
-public class DesignThemeDTO {
+public class DesignThemeDTO implements Serializable {
 
     /**
      * 主键ID

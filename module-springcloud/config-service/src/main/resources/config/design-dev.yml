@@ -8,6 +8,11 @@ spring:
       port: 27017
       database: easy_chart_design
 
+  redis:
+    host: 192.168.8.148
+    password: 1234qwer
+    database: 0
+
 design:
   series:
     calc:

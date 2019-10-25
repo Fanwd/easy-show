@@ -5,6 +5,8 @@ import com.glodon.easyshow.entity.DesignThemeEntity;
 import com.glodon.easyshow.repository.DesignThemeRepository;
 import com.glodon.easyshow.service.DesignThemeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -20,6 +22,7 @@ import java.util.stream.Collectors;
  * @Date 2019/10/15 20:16
  **/
 @Service
+@CacheConfig(cacheNames = "design", keyGenerator = "customizerKeyGenerator")
 @Transactional(rollbackFor = Exception.class)
 public class DesignThemeServiceImpl implements DesignThemeService {
 
@@ -27,6 +30,7 @@ public class DesignThemeServiceImpl implements DesignThemeService {
     private DesignThemeRepository designThemeRepository;
 
     @Override
+    @Cacheable
     public Optional<DesignThemeDTO> getThemeById(String id) {
         Optional<DesignThemeEntity> entityOptional = designThemeRepository.findById(id);
         return entityOptional.map(DesignThemeDTO::new);
@@ -62,6 +66,7 @@ public class DesignThemeServiceImpl implements DesignThemeService {
     }
 
     @Override
+    @Cacheable
     public List<DesignThemeDTO> listAll() {
         List<DesignThemeEntity> entityList = designThemeRepository.findAll();
         return entityList.stream()
