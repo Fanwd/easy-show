@@ -55,17 +55,11 @@ public class SeriesManager implements InitializingBean {
      * @param designChartDTO
      * @return
      */
-    public Object seriesData(DesignChartDTO designChartDTO) {
+    public Object seriesData(DesignChartDTO designChartDTO, DesignDatasourceDTO datasourceDTO) {
         if (null == designChartDTO) {
             return null;
         }
         // 获取数据源信息
-        String datasourceId = designChartDTO.getDatasourceId();
-        Optional<DesignDatasourceDTO> datasource = designDatasourceService.getDatasourceById(datasourceId);
-        if (null == datasource || !datasource.isPresent()) {
-            return null;
-        }
-        DesignDatasourceDTO datasourceDTO = datasource.get();
         Integer type = datasourceDTO.getType();
         String data = "";
         if (DatasourceTypeEnum.STATIC.getType().equals(type)) {
@@ -75,7 +69,7 @@ public class SeriesManager implements InitializingBean {
             try {
                 data = proxyService.requestData(requestInfo);
             } catch (URISyntaxException e) {
-                logger.warn("代理请求异常 datasourceId[{}], requestInfo[{}]", datasourceId, requestInfo, e);
+                logger.warn("代理请求异常 datasource[{}], requestInfo[{}]", datasourceDTO, requestInfo, e);
                 // 默认取缓存数据
                 data = datasourceDTO.getData();
             }

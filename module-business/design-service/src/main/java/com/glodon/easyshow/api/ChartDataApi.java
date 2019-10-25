@@ -1,5 +1,6 @@
 package com.glodon.easyshow.api;
 
+import com.glodon.easyshow.dto.DesignChartDataDTO;
 import com.glodon.easyshow.result.JsonResult;
 import com.glodon.easyshow.service.ChartDataService;
 import io.swagger.annotations.Api;
@@ -23,10 +24,10 @@ public class ChartDataApi {
     @Autowired
     private ChartDataService chartDataService;
 
-    @ApiOperation("获取图表展示数据")
+    @ApiOperation("根据图表ID获取图表数据")
     @GetMapping("/chart_dates/{id}")
-    public JsonResult<Object> series(@ApiParam("图表ID") @PathVariable("id") String id) {
-        Object result = chartDataService.getResultById(id);
+    public JsonResult<DesignChartDataDTO> series(@ApiParam("图表ID") @PathVariable("id") String id) {
+        DesignChartDataDTO result = chartDataService.getResultById(id);
         return JsonResult.success(result);
     }
 }

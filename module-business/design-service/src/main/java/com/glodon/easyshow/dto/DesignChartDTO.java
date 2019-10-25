@@ -64,6 +64,17 @@ public class DesignChartDTO {
     public DesignChartDTO() {
     }
 
+    public DesignChartDTO(DesignChartDTO designChartDTO) {
+        this.id = designChartDTO.getId();
+        this.name = designChartDTO.getName();
+        this.chartType = designChartDTO.getChartType();
+        this.chartStyle = designChartDTO.getChartStyle();
+        this.style = designChartDTO.getStyle();
+        this.design = designChartDTO.getDesign();
+        this.datasourceId = designChartDTO.getDatasourceId();
+        this.themeId = designChartDTO.getThemeId();
+    }
+
     public DesignChartDTO(DesignChartEntity entity) {
         this.id = entity.getId();
         this.name = entity.getName();

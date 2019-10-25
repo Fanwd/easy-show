@@ -1,5 +1,6 @@
 package com.glodon.easyshow.service;
 
+import com.glodon.easyshow.dto.DesignChartDataDTO;
 import com.glodon.easyshow.pojo.ChartResult;
 
 /**
@@ -16,6 +17,6 @@ public interface ChartDataService {
      * @param id
      * @return
      */
-    Object getResultById(String id);
+    DesignChartDataDTO getResultById(String id);
 
 }
