@@ -1,5 +1,6 @@
 package com.glodon.easyshow.dto;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
@@ -8,12 +9,13 @@ import io.swagger.annotations.ApiModelProperty;
  * @Author fanwd
  * @Date 2019/10/25 10:24
  **/
+@ApiModel("图表数据DTO")
 public class DesignChartDataDTO extends DesignChartDTO {
 
-    @ApiModelProperty(value = "计算类型", allowableValues = "{0, 1}", notes = "0：前端计算；1：后端计算")
+    @ApiModelProperty(value = "计算类型0：前端计算；1：后端计算")
     private Integer type;
 
-    @ApiModelProperty(value = "计算结果", notes = "type为1时此字段未结果")
+    @ApiModelProperty(value = "计算结果", notes = "type字段为1时此字段为结果")
     private Object result;
 
     public DesignChartDataDTO() {
