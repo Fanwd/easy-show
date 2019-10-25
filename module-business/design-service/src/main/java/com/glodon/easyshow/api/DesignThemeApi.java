@@ -34,29 +34,29 @@ public class DesignThemeApi {
 
     @ApiOperation("根据ID查询主题")
     @GetMapping("/themes/{id}")
-    public JsonResult<Optional<DesignThemeDTO>> getThemeById(@ApiParam("主题ID") @PathVariable("id") String id) {
+    public JsonResult<Optional<DesignThemeDTO>> getThemeById(@ApiParam(value = "主题ID", required = true) @PathVariable("id") String id) {
         Optional<DesignThemeDTO> result = chartThemeService.getThemeById(id);
         return JsonResult.success(result);
     }
 
     @ApiOperation("新增主题")
     @PostMapping("/themes")
-    public JsonResult addTheme(@ApiParam("主题信息") @RequestBody DesignThemeDTO designThemeDTO) {
+    public JsonResult addTheme(@ApiParam(value = "主题信息", required = true) @RequestBody DesignThemeDTO designThemeDTO) {
         chartThemeService.addTheme(designThemeDTO);
         return JsonResult.success();
     }
 
     @ApiOperation("修改主题")
     @PutMapping("/themes/{id}")
-    public JsonResult updateTheme(@ApiParam("主题ID") @PathVariable("id") String id,
-                                  @ApiParam("主题信息") @RequestBody DesignThemeDTO designThemeDTO) {
+    public JsonResult updateTheme(@ApiParam(value = "主题ID", required = true) @PathVariable("id") String id,
+                                  @ApiParam(value = "主题信息", required = true) @RequestBody DesignThemeDTO designThemeDTO) {
         chartThemeService.updateTheme(id, designThemeDTO);
         return JsonResult.success();
     }
 
     @ApiOperation("删除主题")
     @DeleteMapping("/themes/{id}")
-    public JsonResult deleteTheme(@ApiParam("主题ID") @PathVariable("id") String id) {
+    public JsonResult deleteTheme(@ApiParam(value = "主题ID", required = true) @PathVariable("id") String id) {
         chartThemeService.deleteThemeById(id);
         return JsonResult.success();
     }

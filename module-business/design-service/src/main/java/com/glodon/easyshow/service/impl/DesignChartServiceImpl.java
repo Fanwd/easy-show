@@ -5,9 +5,11 @@ import com.glodon.easyshow.entity.DesignChartEntity;
 import com.glodon.easyshow.repository.DesignChartRepository;
 import com.glodon.easyshow.service.DesignChartService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -75,8 +77,12 @@ public class DesignChartServiceImpl implements DesignChartService {
     }
 
     @Override
-    public List<DesignChartDTO> listAll() {
-        List<DesignChartEntity> entityList = designChartRepository.findAll();
+    public List<DesignChartDTO> listChart(String datasourceId, String chartType) {
+        DesignChartEntity entity = new DesignChartEntity();
+        entity.setDatasourceId(datasourceId);
+        entity.setChartType(chartType);
+        Example<DesignChartEntity> example = Example.of(entity);
+        List<DesignChartEntity> entityList = designChartRepository.findAll(example);
         return entityList.stream()
                 .map(DesignChartDTO::new)
                 .collect(Collectors.toList());

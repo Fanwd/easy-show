@@ -25,39 +25,40 @@ public class DesignChartApi {
     @Autowired
     DesignChartService designChartService;
 
-    @ApiOperation("获取所有图表")
+    @ApiOperation("查询图表")
     @GetMapping("/charts")
-    public JsonResult<List<DesignChartDTO>> listAllChart() {
-        List<DesignChartDTO> result = designChartService.listAll();
+    public JsonResult<List<DesignChartDTO>> listAllChart(@ApiParam(value = "数据源ID") @RequestParam(value = "datasourceId", required = false) String datasourceId,
+                                                         @ApiParam(value = "图表类型") @RequestParam(value = "chartType", required = false) String chartType) {
+        List<DesignChartDTO> result = designChartService.listChart(datasourceId, chartType);
         return JsonResult.success(result);
     }
 
     @ApiOperation("根据ID查询图表")
     @GetMapping("/charts/{id}")
     @CrossOrigin
-    public JsonResult<Optional<DesignChartDTO>> getChartById(@ApiParam("图表ID") @PathVariable("id") String id) {
+    public JsonResult<Optional<DesignChartDTO>> getChartById(@ApiParam(value = "图表ID", required = true) @PathVariable("id") String id) {
         Optional<DesignChartDTO> result = designChartService.getChartById(id);
         return JsonResult.success(result);
     }
 
     @ApiOperation("新增图表")
     @PostMapping("/charts")
-    public JsonResult addChart(@ApiParam("图表信息") @RequestBody DesignChartDTO designThemeDTO) {
+    public JsonResult addChart(@ApiParam(value = "图表信息", required = true) @RequestBody DesignChartDTO designThemeDTO) {
         designChartService.addChart(designThemeDTO);
         return JsonResult.success();
     }
 
     @ApiOperation("修改图表")
     @PutMapping("/charts/{id}")
-    public JsonResult updateChart(@ApiParam("图表ID") @PathVariable("id") String id,
-                                  @ApiParam("图表信息") @RequestBody DesignChartDTO designThemeDTO) {
+    public JsonResult updateChart(@ApiParam(value = "图表ID", required = true) @PathVariable("id") String id,
+                                  @ApiParam(value = "图表信息", required = true) @RequestBody DesignChartDTO designThemeDTO) {
         designChartService.updateChart(id, designThemeDTO);
         return JsonResult.success();
     }
 
     @ApiOperation("删除图表")
     @DeleteMapping("/charts/{id}")
-    public JsonResult deleteChart(@ApiParam("图表ID") @PathVariable("id") String id) {
+    public JsonResult deleteChart(@ApiParam(value = "图表ID", required = true) @PathVariable("id") String id) {
         designChartService.deleteChartById(id);
         return JsonResult.success();
     }

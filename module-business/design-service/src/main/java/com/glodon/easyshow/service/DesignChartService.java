@@ -52,9 +52,11 @@ public interface DesignChartService {
     void deleteChartById(String id);
 
     /**
-     * 查询所有图表
+     * 查询图表
      *
+     * @param datasourceId 数据源ID
+     * @param chartType    图表类型
      * @return
      */
-    List<DesignChartDTO> listAll();
+    List<DesignChartDTO> listChart(String datasourceId, String chartType);
 }
