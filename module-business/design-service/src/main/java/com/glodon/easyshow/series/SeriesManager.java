@@ -78,25 +78,27 @@ public class SeriesManager implements InitializingBean {
             return null;
         }
         try {
-            return this.series(designChartDTO, data);
+            return this.series(designChartDTO, data, datasourceDTO.getDataPath());
         } catch (ScriptException e) {
             logger.warn("脚本执行异常designChartDTO[{}], data", designChartDTO, data, e);
         } catch (NoSuchMethodException e) {
             logger.warn("脚本中无此方法designChartDTO[{}], data", designChartDTO, data, e);
+        } catch (IOException e) {
+            logger.warn("脚本执行异常designChartDTO[{}], data", designChartDTO, data, e);
         }
         return null;
     }
 
-    private Object series(DesignChartDTO designChartDTO, String data) throws ScriptException, NoSuchMethodException {
+    private Object series(DesignChartDTO designChartDTO, String data, String dataPath) throws ScriptException, NoSuchMethodException, IOException {
         String objectName = seriesJsCalcProperties.getObjectName();
         if (StringUtils.isEmpty(objectName)) {
             return this.invocable.invokeFunction(seriesJsCalcProperties.getMethodName(), designChartDTO, data);
         } else {
             Object obj = scriptEngine.get(objectName);
             Map<String, Object> map = new HashMap<>();
-            map.put("raw", data);
-            map.put("design", designChartDTO.getDesign());
-            map.put("isJSON", false);
+            List<Map<String, Object>> dataList = this.readData(data, dataPath);
+            map.put("data", dataList);
+            map.put("chart", designChartDTO);
             return this.invocable.invokeMethod(obj, seriesJsCalcProperties.getMethodName(), map);
         }
     }
@@ -108,7 +110,6 @@ public class SeriesManager implements InitializingBean {
      * @param dataPath
      * @return
      */
-    @Deprecated
     private List<Map<String, Object>> readData(String data, String dataPath) {
         try {
             List<Map<String, Object>> dataList = new ArrayList<>();
