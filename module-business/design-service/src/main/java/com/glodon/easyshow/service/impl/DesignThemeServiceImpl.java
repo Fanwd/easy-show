@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
  * @Date 2019/10/15 20:16
  **/
 @Service
-@CacheConfig(cacheNames = "design", keyGenerator = "customizerKeyGenerator")
+@CacheConfig(cacheNames = "design")
 @Transactional(rollbackFor = Exception.class)
 public class DesignThemeServiceImpl implements DesignThemeService {
 

@@ -2,6 +2,7 @@ package com.glodon.easyshow.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.glodon.easyshow.dto.DesignChartDataDTO;
+import com.glodon.easyshow.redis.RedisDao;
 import com.glodon.easyshow.result.JsonResult;
 import com.glodon.easyshow.service.ChartDataService;
 import io.swagger.annotations.Api;
@@ -26,6 +27,9 @@ public class ChartDataApi {
     private ObjectMapper objectMapper;
 
     @Autowired
+    private RedisDao redisDao;
+
+    @Autowired
     private ChartDataService chartDataService;
 
     @ApiOperation("根据图表ID获取图表数据")
@@ -33,5 +37,11 @@ public class ChartDataApi {
     public JsonResult<DesignChartDataDTO> series(@ApiParam("图表ID") @PathVariable("id") String id) {
         DesignChartDataDTO result = chartDataService.getResultById(id);
         return JsonResult.success(result);
+    }
+
+    @GetMapping("/chart_dates/cache")
+    public JsonResult cache() {
+        redisDao.set("fanwd", "fanweidong");
+        return JsonResult.success();
     }
 }

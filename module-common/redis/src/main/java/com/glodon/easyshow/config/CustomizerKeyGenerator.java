@@ -12,7 +12,6 @@ import java.lang.reflect.Method;
  * @Author fanwd
  * @Date 2019/10/25 14:52
  **/
-@Component
 public class CustomizerKeyGenerator implements KeyGenerator {
 
     @Override
