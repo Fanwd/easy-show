@@ -30,7 +30,7 @@ public class DesignThemeServiceImpl implements DesignThemeService {
     private DesignThemeRepository designThemeRepository;
 
     @Override
-    @Cacheable(key = "#root.targetClass:#id")
+    @Cacheable(key = "targetClass.getSimpleName() + ':' + #id")
     public Optional<DesignThemeDTO> getThemeById(String id) {
         Optional<DesignThemeEntity> entityOptional = designThemeRepository.findById(id);
         return entityOptional.map(DesignThemeDTO::new);
