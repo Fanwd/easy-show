@@ -1,10 +1,2 @@
 server:
   port: 11003
-spring:
-  cache:
-    type: redis
-    cache-names: design
-    redis:
-      time-to-live: 24h
-      cache-null-values: true
-      use-key-prefix: true

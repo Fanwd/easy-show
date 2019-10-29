@@ -1,7 +1,6 @@
 package com.glodon.easyshow.config;
 
 import org.springframework.cache.interceptor.KeyGenerator;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Method;
@@ -25,6 +24,6 @@ public class CustomizerKeyGenerator implements KeyGenerator {
         }
         String param = StringUtils.arrayToCommaDelimitedString(params);
 
-        return simpleName + ":" + methodName + "(" + param + ")";
+        return simpleName + "(" + param + ")";
     }
 }

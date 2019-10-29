@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
  * @Date 2019/10/15 20:16
  **/
 @Service
-@CacheConfig(cacheNames = "design")
+@CacheConfig(cacheNames = "theme")
 @Transactional(rollbackFor = Exception.class)
 public class DesignThemeServiceImpl implements DesignThemeService {
 
@@ -30,7 +30,7 @@ public class DesignThemeServiceImpl implements DesignThemeService {
     private DesignThemeRepository designThemeRepository;
 
     @Override
-    @Cacheable
+    @Cacheable(key = "#id")
     public Optional<DesignThemeDTO> getThemeById(String id) {
         Optional<DesignThemeEntity> entityOptional = designThemeRepository.findById(id);
         return entityOptional.map(DesignThemeDTO::new);
