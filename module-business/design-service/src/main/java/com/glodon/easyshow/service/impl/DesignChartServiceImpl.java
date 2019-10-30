@@ -5,13 +5,10 @@ import com.glodon.easyshow.entity.DesignChartEntity;
 import com.glodon.easyshow.repository.DesignChartRepository;
 import com.glodon.easyshow.service.DesignChartService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,7 +21,6 @@ import java.util.stream.Collectors;
  * @Date 2019/10/17 20:19
  **/
 @Service
-@CacheConfig(cacheNames = "chart")
 @Transactional(rollbackFor = Exception.class)
 public class DesignChartServiceImpl implements DesignChartService {
 
@@ -80,7 +76,6 @@ public class DesignChartServiceImpl implements DesignChartService {
     }
 
     @Override
-    @Cacheable
     public List<DesignChartDTO> listChart(String datasourceId, String chartType) {
         DesignChartEntity entity = new DesignChartEntity();
         entity.setDatasourceId(datasourceId);
