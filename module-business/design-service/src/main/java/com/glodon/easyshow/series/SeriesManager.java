@@ -6,7 +6,6 @@ import com.glodon.easyshow.dto.DesignChartDTO;
 import com.glodon.easyshow.dto.DesignDatasourceDTO;
 import com.glodon.easyshow.enums.DatasourceTypeEnum;
 import com.glodon.easyshow.pojo.RequestInfo;
-import com.glodon.easyshow.service.DesignDatasourceService;
 import com.glodon.easyshow.service.ProxyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,9 +30,6 @@ import java.util.*;
  **/
 @Service
 public class SeriesManager implements InitializingBean {
-
-    @Autowired
-    private DesignDatasourceService designDatasourceService;
 
     @Autowired
     private ProxyService proxyService;
@@ -142,6 +138,7 @@ public class SeriesManager implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
+        // 初始化计算js
         ScriptEngineManager scriptEngineManager = new ScriptEngineManager(this.getClass().getClassLoader());
         ScriptEngine scriptEngine = scriptEngineManager.getEngineByExtension("js");
         InputStream jsStream = this.getClass().getClassLoader().getResourceAsStream(seriesJsCalcProperties.getJsName());
