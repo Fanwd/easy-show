@@ -21,22 +21,20 @@ public class CacheServiceImpl {
         return "getById";
     }
 
-    @Cacheable(key="#product + 'all'")
+    @Cacheable(key="#product + ':all'")
     public String getAll(String product) {
         return "getAll";
     }
 
     @Caching(evict = {
             @CacheEvict(key="#product + ':' + #id"),
-            @CacheEvict(key="#product + 'all'")
+            @CacheEvict(key="#product + ':all'")
     })
     public String updateById(String product, String id) {
         return "updateById";
     }
 
-    @Caching(evict = {
-            @CacheEvict(condition = "#root.caches[0].name matches 'product.*'")
-    })
+    @CacheEvict(key = "#product + ':*'")
     public String delteAll(String product) {
         return "deleteAll";
     }

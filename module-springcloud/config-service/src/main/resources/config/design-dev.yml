@@ -15,12 +15,11 @@ spring:
 
   cache:
     type: redis
-    cache-names: "es:${spring.application.name}:springcache"
     redis:
       time-to-live: 24h
       cache-null-values: true
       use-key-prefix: true
-      key-prefix: "es:${spring.application.name}:springcache"
+      key-prefix: "ed:${spring.application.name}:springcache"
 
 design:
   series:

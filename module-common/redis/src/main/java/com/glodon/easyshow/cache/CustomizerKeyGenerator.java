@@ -1,4 +1,4 @@
-package com.glodon.easyshow.config;
+package com.glodon.easyshow.cache;
 
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.util.StringUtils;
