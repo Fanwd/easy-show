@@ -4,8 +4,6 @@ import com.glodon.easyshow.entity.DesignChartEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-import java.io.Serializable;
-
 /**
  * @ClassName DesignChartDTO
  * @Description 图表设计dto
@@ -13,7 +11,7 @@ import java.io.Serializable;
  * @Date 2019/10/17 19:03
  **/
 @ApiModel("图表设计DTO")
-public class DesignChartDTO implements Serializable {
+public class DesignChartDTO {
 
     /**
      * 主键ID

@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 /**
@@ -75,17 +76,13 @@ public class SeriesManager implements InitializingBean {
         }
         try {
             return this.series(designChartDTO, data, datasourceDTO.getDataPath());
-        } catch (ScriptException e) {
-            logger.warn("脚本执行异常designChartDTO[{}], data", designChartDTO, data, e);
-        } catch (NoSuchMethodException e) {
-            logger.warn("脚本中无此方法designChartDTO[{}], data", designChartDTO, data, e);
-        } catch (IOException e) {
+        } catch (ScriptException | NoSuchMethodException e) {
             logger.warn("脚本执行异常designChartDTO[{}], data", designChartDTO, data, e);
         }
         return null;
     }
 
-    private Object series(DesignChartDTO designChartDTO, String data, String dataPath) throws ScriptException, NoSuchMethodException, IOException {
+    private Object series(DesignChartDTO designChartDTO, String data, String dataPath) throws ScriptException, NoSuchMethodException {
         String objectName = seriesJsCalcProperties.getObjectName();
         if (StringUtils.isEmpty(objectName)) {
             return this.invocable.invokeFunction(seriesJsCalcProperties.getMethodName(), designChartDTO, data);
@@ -140,19 +137,19 @@ public class SeriesManager implements InitializingBean {
     public void afterPropertiesSet() throws Exception {
         // 初始化计算js
         ScriptEngineManager scriptEngineManager = new ScriptEngineManager(this.getClass().getClassLoader());
-        ScriptEngine scriptEngine = scriptEngineManager.getEngineByExtension("js");
+        ScriptEngine se = scriptEngineManager.getEngineByExtension("js");
         InputStream jsStream = this.getClass().getClassLoader().getResourceAsStream(seriesJsCalcProperties.getJsName());
         if (jsStream == null) {
             throw new FileNotFoundException(seriesJsCalcProperties.getJsName());
         }
-        InputStreamReader jsReader = new InputStreamReader(jsStream);
-        if (scriptEngine instanceof Compilable) {
-            CompiledScript compiledScript = ((Compilable) scriptEngine).compile(jsReader);
+        InputStreamReader jsReader = new InputStreamReader(jsStream, StandardCharsets.UTF_8);
+        if (se instanceof Compilable) {
+            CompiledScript compiledScript = ((Compilable) se).compile(jsReader);
             compiledScript.eval();
-            this.scriptEngine = scriptEngine;
+            this.scriptEngine = se;
         }
-        if (scriptEngine instanceof Invocable) {
-            this.invocable = ((Invocable) scriptEngine);
+        if (se instanceof Invocable) {
+            this.invocable = ((Invocable) se);
         }
     }
 }
