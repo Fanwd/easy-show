@@ -5,6 +5,7 @@ import com.glodon.easyshow.entity.DesignChartEntity;
 import com.glodon.easyshow.repository.DesignChartRepository;
 import com.glodon.easyshow.service.DesignChartService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.*;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
  * @Date 2019/10/17 20:19
  **/
 @Service
+@CacheConfig(cacheNames = "DesignChartServiceImpl")
 @Transactional(rollbackFor = Exception.class)
 public class DesignChartServiceImpl implements DesignChartService {
 
@@ -28,22 +30,14 @@ public class DesignChartServiceImpl implements DesignChartService {
     private DesignChartRepository designChartRepository;
 
     @Override
+    @Cacheable(key = "#id")
     public Optional<DesignChartDTO> getChartById(String id) {
         Optional<DesignChartEntity> entityOptional = designChartRepository.findById(id);
         return entityOptional.map(DesignChartDTO::new);
     }
 
     @Override
-    public List<DesignChartDTO> listChartByDatasourceId(String id) {
-        Assert.notNull(id, "Datasource id is null");
-
-        List<DesignChartEntity> entityList = designChartRepository.findByDatasourceId(id);
-        return entityList.stream()
-                .map(DesignChartDTO::new)
-                .collect(Collectors.toList());
-    }
-
-    @Override
+    @CacheEvict(key = "'list*'")
     public void addChart(DesignChartDTO designChartDTO) {
         Assert.notNull(designChartDTO, "Chart is null");
 
@@ -52,6 +46,8 @@ public class DesignChartServiceImpl implements DesignChartService {
     }
 
     @Override
+    @CachePut(key = "#id")
+    @CacheEvict(key = "'list*'")
     public void updateChart(String id, DesignChartDTO designChartDTO) {
         Assert.notNull(id, "Id is null");
         Assert.notNull(designChartDTO, "Chart is null");
@@ -71,11 +67,16 @@ public class DesignChartServiceImpl implements DesignChartService {
     }
 
     @Override
+    @Caching(evict = {
+            @CacheEvict(key = "#id"),
+            @CacheEvict(key = "'list*'")
+    })
     public void deleteChartById(String id) {
         designChartRepository.deleteById(id);
     }
 
     @Override
+    @Cacheable(key = "'list-' + #datasourceId + '-' + #chartType")
     public List<DesignChartDTO> listChart(String datasourceId, String chartType) {
         DesignChartEntity entity = new DesignChartEntity();
         entity.setDatasourceId(datasourceId);

@@ -12,5 +12,12 @@ import java.net.URISyntaxException;
  **/
 public interface ProxyService {
 
+    /**
+     * 代理请求
+     *
+     * @param requestInfo 请求信息
+     * @return 请求结果
+     * @throws URISyntaxException URL解析异常
+     */
     String requestData(RequestInfo requestInfo) throws URISyntaxException;
 }

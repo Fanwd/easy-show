@@ -5,6 +5,7 @@ import com.glodon.easyshow.entity.DesignThemeEntity;
 import com.glodon.easyshow.repository.DesignThemeRepository;
 import com.glodon.easyshow.service.DesignThemeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
  * @Date 2019/10/15 20:16
  **/
 @Service
+@CacheConfig(cacheNames = "DesignThemeServiceImpl")
 @Transactional(rollbackFor = Exception.class)
 public class DesignThemeServiceImpl implements DesignThemeService {
 
@@ -27,12 +29,14 @@ public class DesignThemeServiceImpl implements DesignThemeService {
     private DesignThemeRepository designThemeRepository;
 
     @Override
+    @Cacheable(key = "#id")
     public Optional<DesignThemeDTO> getThemeById(String id) {
         Optional<DesignThemeEntity> entityOptional = designThemeRepository.findById(id);
         return entityOptional.map(DesignThemeDTO::new);
     }
 
     @Override
+    @CacheEvict(key = "'list'")
     public void addTheme(DesignThemeDTO designThemeDTO) {
         if (null == designThemeDTO) {
             return;
@@ -43,7 +47,9 @@ public class DesignThemeServiceImpl implements DesignThemeService {
     }
 
     @Override
-    public void updateTheme(String id, DesignThemeDTO designThemeDTO) {
+    @CachePut(key = "#id")
+    @CacheEvict(key = "'list'")
+    public DesignThemeDTO updateTheme(String id, DesignThemeDTO designThemeDTO) {
         Assert.notNull(designThemeDTO, "theme is null");
         Assert.notNull(id, "theme id is null");
 
@@ -54,14 +60,20 @@ public class DesignThemeServiceImpl implements DesignThemeService {
         oldTheme.setName(designThemeDTO.getName());
         oldTheme.setStyle(designThemeDTO.getStyle());
         designThemeRepository.save(oldTheme);
+        return new DesignThemeDTO(oldTheme);
     }
 
     @Override
+    @Caching(evict = {
+            @CacheEvict(key = "#id"),
+            @CacheEvict(key = "'list'")
+    })
     public void deleteThemeById(String id) {
         designThemeRepository.deleteById(id);
     }
 
     @Override
+    @Cacheable(key = "'list'")
     public List<DesignThemeDTO> listAll() {
         List<DesignThemeEntity> entityList = designThemeRepository.findAll();
         return entityList.stream()

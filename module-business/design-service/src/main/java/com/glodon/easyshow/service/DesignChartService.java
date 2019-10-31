@@ -22,14 +22,6 @@ public interface DesignChartService {
     Optional<DesignChartDTO> getChartById(String id);
 
     /**
-     * 根据数据源ID查询数据
-     *
-     * @param id 数据源ID
-     * @return
-     */
-    List<DesignChartDTO> listChartByDatasourceId(String id);
-
-    /**
      * 添加图表
      *
      * @param designChartDTO 图表信息
