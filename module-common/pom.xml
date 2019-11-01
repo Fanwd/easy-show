@@ -19,6 +19,7 @@
         <module>swagger</module>
         <module>mongo</module>
         <module>redis</module>
+        <module>security</module>
     </modules>
 
 
