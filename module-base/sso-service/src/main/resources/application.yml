@@ -1,2 +1,7 @@
 server:
   port: 21001
+spring:
+  security:
+    user:
+      name: user
+      password: user
