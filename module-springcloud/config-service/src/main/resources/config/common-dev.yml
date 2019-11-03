@@ -10,3 +10,8 @@ eureka:
     prefer-ip-address: true
     lease-expiration-duration-in-seconds: 15 # 续约更新时间间隔（默认90秒）
     lease-renewal-interval-in-seconds: 5 # 续约到期时间（默认30秒）
+
+logging:
+  level:
+    org.springframework.cloud.config: warn
+    com.netflix.discovery: warn
