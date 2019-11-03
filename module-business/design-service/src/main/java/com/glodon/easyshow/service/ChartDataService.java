@@ -1,7 +1,6 @@
 package com.glodon.easyshow.service;
 
 import com.glodon.easyshow.dto.DesignChartDataDTO;
-import com.glodon.easyshow.pojo.ChartResult;
 
 /**
  * @ClassName ChartDataService

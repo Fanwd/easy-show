@@ -1,7 +1,6 @@
-package com.glodon.easyshow.config;
+package com.glodon.easyshow.cache;
 
 import org.springframework.cache.interceptor.KeyGenerator;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Method;
@@ -12,7 +11,6 @@ import java.lang.reflect.Method;
  * @Author fanwd
  * @Date 2019/10/25 14:52
  **/
-@Component
 public class CustomizerKeyGenerator implements KeyGenerator {
 
     @Override
@@ -26,6 +24,6 @@ public class CustomizerKeyGenerator implements KeyGenerator {
         }
         String param = StringUtils.arrayToCommaDelimitedString(params);
 
-        return simpleName + ":" + methodName + "(" + param + ")";
+        return simpleName + "(" + param + ")";
     }
 }

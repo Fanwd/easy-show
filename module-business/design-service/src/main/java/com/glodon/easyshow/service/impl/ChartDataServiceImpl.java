@@ -35,20 +35,20 @@ public class ChartDataServiceImpl implements ChartDataService {
 
     @Override
     public DesignChartDataDTO getResultById(String id) {
-        Optional<DesignChartDTO> designChartDTOOptional = designChartService.getChartById(id);
-        if (!designChartDTOOptional.isPresent()) {
+        Optional<DesignChartDTO> designChartDtoOptional = designChartService.getChartById(id);
+        if (!designChartDtoOptional.isPresent()) {
             // 未查到图表信息
             return null;
         }
-        DesignChartDTO designChartDTO = designChartDTOOptional.get();
+        DesignChartDTO designChartDTO = designChartDtoOptional.get();
 
         String datasourceId = designChartDTO.getDatasourceId();
-        Optional<DesignDatasourceDTO> datasourceDTOOptional = designDatasourceService.getDatasourceById(datasourceId);
-        if (!datasourceDTOOptional.isPresent()) {
+        Optional<DesignDatasourceDTO> datasourceDtoOptional = designDatasourceService.getDatasourceById(datasourceId);
+        if (!datasourceDtoOptional.isPresent()) {
             // 前端计算
             return new DesignChartDataDTO(designChartDTO, SeriesByEnum.FRONT_SEIRES.getType(), null);
         }
-        DesignDatasourceDTO designDatasourceDTO = datasourceDTOOptional.get();
+        DesignDatasourceDTO designDatasourceDTO = datasourceDtoOptional.get();
 
         // 开始计算
         Object result = seriesManager.seriesData(designChartDTO, designDatasourceDTO);

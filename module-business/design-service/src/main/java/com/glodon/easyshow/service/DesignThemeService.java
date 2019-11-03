@@ -31,10 +31,11 @@ public interface DesignThemeService {
     /**
      * 更新主题
      *
-     * @param id            主键ID
+     * @param id             主键ID
      * @param designThemeDTO 主题信息
+     * @return 更新后的主题
      */
-    void updateTheme(String id, DesignThemeDTO designThemeDTO);
+    DesignThemeDTO updateTheme(String id, DesignThemeDTO designThemeDTO);
 
     /**
      * 根据ID删除主题

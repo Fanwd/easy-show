@@ -34,7 +34,7 @@ public interface DesignDatasourceService {
      * @param id                  主键ID
      * @param designDatasourceDTO 数据源信息
      */
-    void updateDatasource(String id, DesignDatasourceDTO designDatasourceDTO);
+    DesignDatasourceDTO updateDatasource(String id, DesignDatasourceDTO designDatasourceDTO);
 
     /**
      * 根据ID删除数据源
