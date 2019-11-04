@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @ClassName SeriesJsCalcProperties
- * @Description TODO
+ * @Description 序列化计算js配置
  * @Author fanwd
  * @Date 2019/10/23 18:43
  **/

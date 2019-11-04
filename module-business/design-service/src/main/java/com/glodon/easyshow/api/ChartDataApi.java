@@ -1,6 +1,5 @@
 package com.glodon.easyshow.api;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.glodon.easyshow.dto.DesignChartDataDTO;
 import com.glodon.easyshow.result.JsonResult;
 import com.glodon.easyshow.service.ChartDataService;
@@ -21,9 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Api(tags = "图表数据API")
 public class ChartDataApi {
-
-    @Autowired
-    private ObjectMapper objectMapper;
 
     @Autowired
     private ChartDataService chartDataService;

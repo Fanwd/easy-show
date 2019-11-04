@@ -13,6 +13,14 @@ spring:
     password: 1234qwer
     database: 0
 
+  cache:
+    type: redis
+    redis:
+      time-to-live: 24h
+      cache-null-values: true
+      use-key-prefix: true
+      key-prefix: "ed:${spring.application.name}:springcache"
+
 design:
   series:
     calc:
