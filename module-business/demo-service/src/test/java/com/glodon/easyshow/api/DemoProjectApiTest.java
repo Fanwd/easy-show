@@ -33,13 +33,13 @@ public class DemoProjectApiTest {
         List<Project> projectList = new ArrayList<>();
         projectList.add(new Project());
         Mockito.when(projectRepository.listAllProject()).thenReturn(projectList);
-        String result = this.mockMvc
+        this.mockMvc
                 .perform(MockMvcRequestBuilders.get("/projects"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString("success")))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("code", Matchers.equalTo(0)))
-                .andReturn().getResponse().getContentAsString();
-        System.out.println(result);
+                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(0))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.length()").value(1));
     }
 }
