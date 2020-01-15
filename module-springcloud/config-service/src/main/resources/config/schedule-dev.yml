@@ -6,24 +6,33 @@ spring:
     url: jdbc:mysql://localhost:3306/easy_show_schedule?serverTimezone=UTC
     username: root
     password: root
+    # hikari线程池管理
     hikari:
+      # 线程池大小
       maximum-pool-size: 100
+      # 最小空闲数
       minimum-idle: 10
 
   jpa:
     show-sql: true
 
   quartz:
+    # 默认为内存，改为通过数据库存储
     job-store-type: jdbc
     jdbc:
+      # 当使用数据库存储时，不初始化数据库（需手动执行初始化脚本{@link org.quartz.impl.jdbcjobstore}）
       initialize-schema: never
     properties:
       org:
         quartz:
           scheduler:
-            instanceName : easyShowQuartzScheduler
+            # 调度器名称 默认为QuartzScheduler
+            instanceName: easyShowQuartzScheduler
+            # 实例ID自动生成（集群部署时需改为自动生成）
             instanceId: AUTO
+          # 设置线程池信息 {@link org.quartz.simpl.SimpleThreadPool}
           threadPool:
+            # 设置10个线程
             threadCount: 10
           jobStore:
             isClustered: true
