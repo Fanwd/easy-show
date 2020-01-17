@@ -8,8 +8,8 @@ import javax.persistence.*;
  * @Date: Create in 0:10 2019/10/8
  */
 @Entity
-@Table(name = "task_info", schema = "easy_show_schedule")
-public class TaskInfoEntity {
+@Table(name = "sche_task_info", schema = "easy_show_schedule")
+public class ScheTaskInfoEntity {
     private long id;
     private String name;
 
@@ -35,15 +35,19 @@ public class TaskInfoEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
-        TaskInfoEntity that = (TaskInfoEntity) o;
+        ScheTaskInfoEntity that = (ScheTaskInfoEntity) o;
 
-        if (id != that.id) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-
-        return true;
+        if (id != that.id) {
+            return false;
+        }
+        return name != null ? name.equals(that.name) : that.name == null;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.glodon.easyshow.repository;
 
-import com.glodon.easyshow.entity.TaskInfoEntity;
+import com.glodon.easyshow.entity.ScheTaskInfoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @Description:
  * @Date: Create in 0:11 2019/10/8
  */
-public interface TaskInfoRepository extends JpaRepository<TaskInfoEntity, Long> {
+public interface ScheTaskInfoRepository extends JpaRepository<ScheTaskInfoEntity, Long> {
 }
