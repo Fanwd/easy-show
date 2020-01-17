@@ -1,7 +1,7 @@
-package com.glodon.easyshow.job;
+package com.glodon.easyshow.schedule.job;
 
 import com.glodon.easyshow.entity.ScheTaskInfoEntity;
-import com.glodon.easyshow.repository.ScheTaskInfoRepository;
+import com.glodon.easyshow.schedule.repository.ScheTaskInfoRepository;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.slf4j.Logger;

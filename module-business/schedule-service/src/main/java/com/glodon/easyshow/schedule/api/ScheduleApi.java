@@ -1,6 +1,6 @@
-package com.glodon.easyshow.api;
+package com.glodon.easyshow.schedule.api;
 
-import com.glodon.easyshow.job.RequestJob;
+import com.glodon.easyshow.schedule.job.RequestJob;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

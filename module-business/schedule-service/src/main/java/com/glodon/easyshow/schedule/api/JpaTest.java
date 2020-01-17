@@ -1,7 +1,7 @@
-package com.glodon.easyshow.api;
+package com.glodon.easyshow.schedule.api;
 
 import com.glodon.easyshow.entity.ScheTaskInfoEntity;
-import com.glodon.easyshow.repository.ScheTaskInfoRepository;
+import com.glodon.easyshow.schedule.repository.ScheTaskInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

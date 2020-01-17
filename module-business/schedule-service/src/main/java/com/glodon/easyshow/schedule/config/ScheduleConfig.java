@@ -1,4 +1,4 @@
-package com.glodon.easyshow.config;
+package com.glodon.easyshow.schedule.config;
 
 /**
  * @ClassName ScheduleConfig

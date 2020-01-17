@@ -1,4 +1,4 @@
-package com.glodon.easyshow.job;
+package com.glodon.easyshow.schedule.job;
 
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;

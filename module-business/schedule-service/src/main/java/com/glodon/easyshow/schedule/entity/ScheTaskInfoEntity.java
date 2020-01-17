@@ -1,4 +1,4 @@
-package com.glodon.easyshow.entity;
+package com.glodon.easyshow.schedule.entity;
 
 import javax.persistence.*;
 

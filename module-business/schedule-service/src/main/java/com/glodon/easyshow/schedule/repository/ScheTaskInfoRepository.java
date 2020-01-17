@@ -1,6 +1,6 @@
-package com.glodon.easyshow.repository;
+package com.glodon.easyshow.schedule.repository;
 
-import com.glodon.easyshow.entity.ScheTaskInfoEntity;
+import com.glodon.easyshow.schedule.entity.ScheTaskInfoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
