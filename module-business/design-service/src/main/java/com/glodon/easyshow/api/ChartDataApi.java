@@ -25,7 +25,7 @@ public class ChartDataApi {
     private ChartDataService chartDataService;
 
     @ApiOperation("根据图表ID获取图表数据")
-    @GetMapping("/chart_dates/{id}")
+    @GetMapping("/chart_datas/{id}")
     public JsonResult<DesignChartDataDTO> series(@ApiParam("图表ID") @PathVariable("id") String id) {
         DesignChartDataDTO result = chartDataService.getResultById(id);
         return JsonResult.success(result);
